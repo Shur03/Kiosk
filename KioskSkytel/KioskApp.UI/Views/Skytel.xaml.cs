@@ -18,7 +18,7 @@ namespace KioskSkytel.KioskApp.UI.Views
     /// <summary>
     /// Interaction logic for Skytel.xaml
     /// </summary>
-    public partial class Skytel : Page
+    public partial class Skytel : UserControl
     {
         public Skytel()
         {
