@@ -17,3 +17,4 @@ C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\ref
 C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskSkytel.pdb
 C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskSkytel.genruntimeconfig.cache
 C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\ref\KioskSkytel.dll
+C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskSkytel.sourcelink.json

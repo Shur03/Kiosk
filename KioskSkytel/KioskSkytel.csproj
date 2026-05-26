@@ -8,4 +8,17 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="KioskApp.Core\Interfaces\" />
+    <Folder Include="KioskApp.Core\Services\" />
+    <Folder Include="KioskApp.Models\" />
+    <Folder Include="KioskApp.Services\Api\" />
+    <Folder Include="KioskApp.Services\HardwareMock\" />
+    <Folder Include="KioskApp.Services\DTOs\" />
+    <Folder Include="KioskApp.Shared\" />
+    <Folder Include="KioskApp.UI\Assets\" />
+    <Folder Include="KioskApp.UI\Controls\" />
+    <Folder Include="KioskApp.UI\ViewModels\" />
+  </ItemGroup>
+
 </Project>

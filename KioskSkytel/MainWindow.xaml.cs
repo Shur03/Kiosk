@@ -6,7 +6,7 @@ namespace KioskSkytel
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             // optional: disable Alt+F4 (basic kiosk protection)
             this.Closing += (s, e) =>
