@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace KioskSkytel
 {
@@ -6,33 +7,102 @@ namespace KioskSkytel
     {
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
 
-            // optional: disable Alt+F4 (basic kiosk protection)
-            this.Closing += (s, e) =>
+            // Default screen
+            ShowWelcomeScreen();
+        }
+
+        // =========================
+        // DEFAULT SCREEN
+        // =========================
+        private void ShowWelcomeScreen()
+        {
+            MainContent.Content = CreatePlaceholderView(
+                "WELCOME",
+                ""
+            );
+        }
+
+        // =========================
+        // MENU BUTTON EVENTS
+        // =========================
+
+        private void BtnSkytel_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = CreatePlaceholderView(
+                "SKYTEL",
+                ""
+            );
+        }
+
+        private void BtnSkymedia_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = CreatePlaceholderView(
+                "SKYMEDIA",
+                ""
+            );
+        }
+
+        private void BtnGoPlus_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = CreatePlaceholderView(
+                "GO+",
+                ""
+            );
+        }
+
+        private void BtnSkynet_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = CreatePlaceholderView(
+                "SKYNET",
+                ""
+            );
+        }
+
+        private void BtnCally_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = CreatePlaceholderView(
+                "CALLY",
+                ""
+            );
+        }
+
+        // =========================
+        // TEMP VIEW GENERATOR
+        // =========================
+
+        private UIElement CreatePlaceholderView(string title, string subtitle)
+        {
+            var stack = new StackPanel
             {
-                e.Cancel = true;
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
             };
-        }
 
-        private void Services_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Services page coming soon");
-        }
+            var titleBlock = new TextBlock
+            {
+                Text = title,
+                FontSize = 52,
+                FontWeight = FontWeights.Bold,
+                Foreground = System.Windows.Media.Brushes.White,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
 
-        private void Payments_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Payments page coming soon");
-        }
+            var subtitleBlock = new TextBlock
+            {
+                Text = subtitle,
+                FontSize = 20,
+                Foreground = System.Windows.Media.Brushes.White,
+                Opacity = 0.8,
+                Margin = new Thickness(0, 12, 0, 0),
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
 
-        private void Balance_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Balance check coming soon");
-        }
+            stack.Children.Add(titleBlock);
+            stack.Children.Add(subtitleBlock);
 
-        private void Help_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Support page coming soon");
+            return stack;
         }
     }
 }

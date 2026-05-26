@@ -11,13 +11,6 @@
      <Grid>
 
         <!-- HEADER -->
-        <TextBlock Text="SKYTEL"
-                   Foreground="White"
-                   FontSize="42"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   Margin="0,30,0,0"/>
 
         <!-- MAIN GRID -->
         <Grid HorizontalAlignment="Center"
@@ -65,12 +58,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                        <Button Content="→"
-                                Width="50"
-                                Height="35"
-                                HorizontalAlignment="Right"
-                                Margin="0,20,0,0"
-                                 Click="Services_Click"/>
+                 
                     </StackPanel>
 
                 </Grid>
@@ -106,12 +94,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                        <Button Content="→"
-                                Width="50"
-                                Height="35"
-                                HorizontalAlignment="Right"
-                                Margin="0,20,0,0"
-                                 Click="Balance_Click"/>
+                       
                     </StackPanel>
 
                 </Grid>
@@ -147,12 +130,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                        <Button Content="→"
-                                Width="50"
-                                Height="35"
-                                HorizontalAlignment="Right"
-                                Margin="0,20,0,0"
-                                 Click="Payments_Click"/>
+                        
 
                     </StackPanel>
                 </Grid>
@@ -188,12 +166,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                        <Button Content="→"
-                                Width="50"
-                                Height="35"
-                                HorizontalAlignment="Right"
-                                Margin="0,20,0,0"
-                                 Click="Payments_Click"/>
+                        
 
                     </StackPanel>
                 </Grid>

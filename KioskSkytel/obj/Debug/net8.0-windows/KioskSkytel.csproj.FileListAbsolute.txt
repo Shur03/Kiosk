@@ -18,3 +18,6 @@ C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\Kio
 C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskSkytel.genruntimeconfig.cache
 C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\ref\KioskSkytel.dll
 C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskSkytel.sourcelink.json
+C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskApp.UI\Views\Skytel.g.cs
+C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskSkytel_MarkupCompile.lref
+C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\obj\Debug\net8.0-windows\KioskApp.UI\Views\Skytel.baml

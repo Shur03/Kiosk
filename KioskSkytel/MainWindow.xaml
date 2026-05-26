@@ -5,201 +5,313 @@
         WindowState="Maximized"
         WindowStyle="None"
         ResizeMode="NoResize">
-       <!-- Background="#009EFA"> //how to set background image? use KioskSkytel/KioskApp.UI/Assets/Images/mongoldoo.png -->
-       <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Revol\source\repos\KioskSkytel\KioskSkytel\KioskApp.UI\Assets\mongoldoo.png"
+
+    <Window.Background>
+        <ImageBrush ImageSource="KioskApp.UI/Assets/mongoldoo.png"
                     Stretch="UniformToFill"/>
     </Window.Background>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="187*"/>
+            <ColumnDefinition Width="183*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
 
         <!-- Overlay -->
-        <Rectangle Fill="#009EFA" Opacity="0.75"/>
+        <Rectangle Fill="#009EFA"
+                   Opacity="0.75" Grid.ColumnSpan="3" Margin="0,0,1,0"/>
 
-        <!-- LEFT SIDE MENU -->
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    Margin="60,0,0,0"
-                    Width="340">
+        <!-- MAIN LAYOUT -->
+        <Grid Grid.ColumnSpan="3" Margin="0,0,1,0">
 
-            <!-- LOGO / TITLE -->
-            <TextBlock Text="SKYTEL"
-                       Foreground="White"
-                       FontSize="42"
-                       FontWeight="Bold"
-                       Margin="0,0,0,40"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <!-- MENU ITEM 1 -->
-            <Border Margin="0,0,0,16"
-                    CornerRadius="18"
-                    Background="White">
-                <Grid Margin="20,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="52"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+            <!-- LEFT MENU -->
+            <Border Grid.Column="0"
+                    Background="#0F172A"
+                    Opacity="0.96">
 
-                    <Border Grid.Column="0"
-                            Width="44" Height="44"
-                            Background="#F1F5F9"
-                            CornerRadius="10">
-                        <TextBlock Text="📄"
-                                   FontSize="22"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                    <StackPanel Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Margin="12,0,0,0">
-                        <TextBlock Text="Skytel"
-                                   FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="Үйлчилгээ авах"
-                                   FontSize="12"
-                                   Foreground="Gray"/>
+                    <StackPanel Margin="40">
+
+                        <!-- TITLE -->
+                        <TextBlock Text="SKYTEL"
+                                   Foreground="White"
+                                   FontSize="42"
+                                   FontWeight="Bold"
+                                   Margin="0,20,0,40"/>
+
+                        <!-- MENU BUTTON -->
+                        <Button Margin="0,0,0,16"
+                                Background="White"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="0"
+                                Height="90">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+
+                                    <Border CornerRadius="18"
+                                            Background="{TemplateBinding Background}">
+
+                                        <ContentPresenter/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                            <Grid Margin="20,16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="52"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Width="44"
+                                        Height="44"
+                                        Background="#F1F5F9"
+                                        CornerRadius="10">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="22"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <StackPanel Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Margin="12,0,0,0">
+
+                                    <TextBlock Text="Skytel"
+                                               FontSize="17"
+                                               FontWeight="Bold"/>
+
+                                    <TextBlock Text="Үйлчилгээ авах"
+                                               FontSize="12"
+                                               Foreground="Gray"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Button>
+                        <Button Margin="0,0,0,16"
+                                Background="White"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="0"
+                                Height="90">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+
+                                    <Border CornerRadius="18"
+                                            Background="{TemplateBinding Background}">
+
+                                        <ContentPresenter/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                            <Grid Margin="20,16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="52"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Width="44"
+                                        Height="44"
+                                        Background="#F1F5F9"
+                                        CornerRadius="10">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="22"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <StackPanel Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Margin="12,0,0,0">
+
+                                    <TextBlock Text="Skytel"
+                                               FontSize="17"
+                                               FontWeight="Bold"/>
+
+                                    <TextBlock Text="Үйлчилгээ авах"
+                                               FontSize="12"
+                                               Foreground="Gray"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Button>
+                        <Button Margin="0,0,0,16"
+                                Background="White"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="0"
+                                Height="90">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+
+                                    <Border CornerRadius="18"
+                                            Background="{TemplateBinding Background}">
+
+                                        <ContentPresenter/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                            <Grid Margin="20,16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="52"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Width="44"
+                                        Height="44"
+                                        Background="#F1F5F9"
+                                        CornerRadius="10">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="22"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <StackPanel Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Margin="12,0,0,0">
+
+                                    <TextBlock Text="Skytel"
+                                               FontSize="17"
+                                               FontWeight="Bold"/>
+
+                                    <TextBlock Text="Үйлчилгээ авах"
+                                               FontSize="12"
+                                               Foreground="Gray"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Button>
+                        <Button Margin="0,0,0,16"
+                                Background="White"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Padding="0"
+                                Height="90">
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+
+                                    <Border CornerRadius="18"
+                                            Background="{TemplateBinding Background}">
+
+                                        <ContentPresenter/>
+
+                                    </Border>
+
+                                </ControlTemplate>
+                            </Button.Template>
+
+                            <Grid Margin="20,16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="52"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0"
+                                        Width="44"
+                                        Height="44"
+                                        Background="#F1F5F9"
+                                        CornerRadius="10">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="22"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <StackPanel Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Margin="12,0,0,0">
+
+                                    <TextBlock Text="Skytel"
+                                               FontSize="17"
+                                               FontWeight="Bold"/>
+
+                                    <TextBlock Text="Үйлчилгээ авах"
+                                               FontSize="12"
+                                               Foreground="Gray"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Button>
+
+                        <!-- MORE BUTTONS HERE -->
+
                     </StackPanel>
-                </Grid>
+
+                </ScrollViewer>
+
             </Border>
 
-            <!-- MENU ITEM 2 -->
-            <Border Margin="0,0,0,16"
-                    CornerRadius="18"
-                    Background="White">
-                <Grid Margin="20,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="52"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+            <!-- RIGHT CONTENT AREA -->
+            <Grid Grid.Column="1">
 
-                    <Border Grid.Column="0"
-                            Width="44" Height="44"
-                            Background="#F1F5F9"
-                            CornerRadius="10">
-                        <TextBlock Text="⚡"
-                                   FontSize="22"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
+                <ContentControl x:Name="MainContent"/>
 
-                    <StackPanel Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Margin="12,0,0,0">
-                        <TextBlock Text="Skymedia"
-                                   FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="Медиа үйлчилгээ"
-                                   FontSize="12"
-                                   Foreground="Gray"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
+                <!-- TEMP PLACEHOLDER -->
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
 
-            <!-- MENU ITEM 3 -->
-            <Border Margin="0,0,0,16"
-                    CornerRadius="18"
-                    Background="White">
-                <Grid Margin="20,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="52"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="WELCOME"
+                               FontSize="52"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
 
-                    <Border Grid.Column="0"
-                            Width="44" Height="44"
-                            Background="#F1F5F9"
-                            CornerRadius="10">
-                        <TextBlock Text="💳"
-                                   FontSize="22"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
+                    <!-- <TextBlock Text="Select a service from the left menu"
+                               FontSize="20"
+                               Foreground="White"
+                               Opacity="0.8"
+                               HorizontalAlignment="Center"
+                               Margin="0,12,0,0"/> -->
 
-                    <StackPanel Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Margin="12,0,0,0">
-                        <TextBlock Text="GO+"
-                                   FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="GO+ үйлчилгээ"
-                                   FontSize="12"
-                                   Foreground="Gray"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
+                </StackPanel>
 
-            <!-- MENU ITEM 4 -->
-            <Border Margin="0,0,0,16"
-                    CornerRadius="18"
-                    Background="White">
-                <Grid Margin="20,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="52"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+            </Grid>
 
-                    <Border Grid.Column="0"
-                            Width="44" Height="44"
-                            Background="#F1F5F9"
-                            CornerRadius="10">
-                        <TextBlock Text="🔄"
-                                   FontSize="22"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
-
-                    <StackPanel Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Margin="12,0,0,0">
-                        <TextBlock Text="Skynet"
-                                   FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="Интернет үйлчилгээ"
-                                   FontSize="12"
-                                   Foreground="Gray"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <!-- MENU ITEM 5 -->
-            <Border Margin="0,0,0,16"
-                    CornerRadius="18"
-                    Background="White">
-                <Grid Margin="20,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="52"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border Grid.Column="0"
-                            Width="44" Height="44"
-                            Background="#F1F5F9"
-                            CornerRadius="10">
-                        <TextBlock Text="📞"
-                                   FontSize="22"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
-
-                    <StackPanel Grid.Column="1"
-                                VerticalAlignment="Center"
-                                Margin="12,0,0,0">
-                        <TextBlock Text="Cally"
-                                   FontSize="17"
-                                   FontWeight="Bold"/>
-                        <TextBlock Text="Дуудлагын үйлчилгээ"
-                                   FontSize="12"
-                                   Foreground="Gray"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-        </StackPanel>
+        </Grid>
 
     </Grid>
+
 </Window>
