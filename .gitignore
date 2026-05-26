@@ -1,1 +1,37 @@
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# Visual Studio cache/options
 .vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+
+# NuGet
+.nuget/
+*.nupkg
+*.nuget.props
+*.nuget.targets
+packages/
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Generated files
+*.baml
+*.g.cs
+*.g.i.cs
+*.g.resources
