@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:KioskSkytel.KioskApp.UI.Views"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-        
-     <Grid>
+
+    <Grid>
 
         <!-- HEADER -->
 
@@ -57,7 +57,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                 
+
                     </StackPanel>
 
                 </Grid>
@@ -70,8 +70,13 @@
                     Background="White"
                     Width="320" Height="260">
                 <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200*"/>
+                        <ColumnDefinition Width="21*"/>
+                        <ColumnDefinition Width="59*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <StackPanel>
+                    <StackPanel Grid.ColumnSpan="3">
                         <Border Width="60" Height="60"
                                 Background="#F1F5F9"
                                 CornerRadius="12">
@@ -93,7 +98,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                       
+
                     </StackPanel>
 
                 </Grid>
@@ -129,7 +134,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                        
+
 
                     </StackPanel>
                 </Grid>
@@ -165,7 +170,7 @@
                                    TextWrapping="Wrap"
                                    Margin="0,8,0,0"/>
 
-                        
+
 
                     </StackPanel>
                 </Grid>

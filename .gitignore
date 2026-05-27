@@ -1,1 +1,49 @@
 .vs/
+.vscode/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# Build / bin / obj
+[Bb]in/
+[Oo]bj/
+*/bin/
+*/obj/
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Publish / artifacts
+publish/
+artifacts/
+
+# Visual Studio temporary files, caches and generated files
+*.cache
+*.log
+*.pdb
+*.obj
+*.ilk
+*.meta
+GeneratedInternalTypeHelper.g.cs
+
+# VS Code
+.vscode/
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Other
+*.tmp
+*.temp

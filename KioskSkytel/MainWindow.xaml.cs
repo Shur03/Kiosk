@@ -18,7 +18,7 @@ namespace KioskSkytel
         // =========================
         private void ShowWelcomeScreen()
         {
-            MainContent.Content = CreatePlaceholderView("WELCOME", "Зүүн цэснээс үйлчилгээ сонгоно уу");
+            MainContent.Content = new Skytel(); 
         }
 
         // =========================

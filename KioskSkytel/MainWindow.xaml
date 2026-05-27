@@ -8,19 +8,18 @@
         Stylus.IsPressAndHoldEnabled="False">
 
     <Window.Resources>
-        <!-- Reusable menu button style -->
+        <!-- Reusable menu button style - no radius, full height -->
         <Style x:Key="MenuButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="Height" Value="90"/>
-            <Setter Property="Margin" Value="0,0,0,16"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="MenuBorder"
-                                CornerRadius="18"
                                 Background="{TemplateBinding Background}">
                             <ContentPresenter/>
                         </Border>
@@ -39,8 +38,10 @@
     </Window.Resources>
 
     <Grid>
-
-        <!-- Background image -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/KioskApp.UI/Assets/images/mongoldoo.png"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
 
         <!-- Dark overlay -->
         <Rectangle Fill="#009EFA" Opacity="0.75"/>
@@ -52,184 +53,161 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ========================= -->
-            <!-- LEFT MENU                 -->
-            <!-- ========================= -->
+            <!-- LEFT MENU - Full height, no gaps -->
             <Border Grid.Column="0"
                     Background="#0F172A"
                     Opacity="0.96">
-
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
-                              PanningMode="VerticalFirst">
-                    <StackPanel Margin="20,30,20,30">
-
-                        <!-- LOGO -->
-                        <TextBlock Text="SKYTEL"
-                                   Foreground="White"
-                                   FontSize="36"
-                                   FontWeight="Bold"
-                                   Margin="8,0,0,32"/>
-
+                              PanningMode="VerticalFirst"
+                              Background="White">
+                    <StackPanel Margin="0">
                         <!-- SKYTEL -->
                         <Button Style="{StaticResource MenuButtonStyle}"
-                                Click="BtnSkytel_Click">
-                            <Grid Margin="16,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="52"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
+                                Click="BtnSkytel_Click"
+                                >
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
                                         Width="44" Height="44"
-                                        Background="#F1F5F9"
-                                        CornerRadius="10"
-                                        VerticalAlignment="Center">
-                                    <TextBlock Text="📄" FontSize="22"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
+                                        Background="Transparent"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,16,0,0">
+                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                           Width="28"
+                                           Height="28"
+                                           Stretch="Uniform"/>
                                 </Border>
-                                <StackPanel Grid.Column="1"
-                                            VerticalAlignment="Center"
-                                            Margin="12,0,0,0">
-                                    <TextBlock Text="Skytel"
-                                               FontSize="17"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text="Үйлчилгээ авах"
-                                               FontSize="12"
-                                               Foreground="Gray"/>
-                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Text="SKYTEL"
+                                           HorizontalAlignment="Center"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="Black"
+                                           Margin="0,8,0,16"/>
                             </Grid>
                         </Button>
 
                         <!-- SKYMEDIA -->
                         <Button Style="{StaticResource MenuButtonStyle}"
                                 Click="BtnSkymedia_Click">
-                            <Grid Margin="16,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="52"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
                                         Width="44" Height="44"
-                                        Background="#F1F5F9"
-                                        CornerRadius="10"
-                                        VerticalAlignment="Center">
-                                    <TextBlock Text="⚡" FontSize="22"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
+                                        Background="Transparent"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,16,0,0">
+                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                           Width="28"
+                                           Height="28"
+                                           Stretch="Uniform"/>
                                 </Border>
-                                <StackPanel Grid.Column="1"
-                                            VerticalAlignment="Center"
-                                            Margin="12,0,0,0">
-                                    <TextBlock Text="Skymedia"
-                                               FontSize="17"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text="Медиа үйлчилгээ"
-                                               FontSize="12"
-                                               Foreground="Gray"/>
-                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Text="SKYMEDIA"
+                                           HorizontalAlignment="Center"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="Black"
+                                           Margin="0,8,0,16"/>
                             </Grid>
                         </Button>
 
                         <!-- GO+ -->
                         <Button Style="{StaticResource MenuButtonStyle}"
                                 Click="BtnGoPlus_Click">
-                            <Grid Margin="16,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="52"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
                                         Width="44" Height="44"
-                                        Background="#F1F5F9"
-                                        CornerRadius="10"
-                                        VerticalAlignment="Center">
-                                    <TextBlock Text="💳" FontSize="22"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
+                                        Background="Transparent"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,16,0,0">
+                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                           Width="28"
+                                           Height="28"
+                                           Stretch="Uniform"/>
                                 </Border>
-                                <StackPanel Grid.Column="1"
-                                            VerticalAlignment="Center"
-                                            Margin="12,0,0,0">
-                                    <TextBlock Text="GO+"
-                                               FontSize="17"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text="GO+ үйлчилгээ"
-                                               FontSize="12"
-                                               Foreground="Gray"/>
-                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Text="GO+"
+                                           HorizontalAlignment="Center"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="Black"
+                                           Margin="0,8,0,16"/>
                             </Grid>
                         </Button>
 
                         <!-- SKYNET -->
                         <Button Style="{StaticResource MenuButtonStyle}"
                                 Click="BtnSkynet_Click">
-                            <Grid Margin="16,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="52"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
                                         Width="44" Height="44"
-                                        Background="#F1F5F9"
-                                        CornerRadius="10"
-                                        VerticalAlignment="Center">
-                                    <TextBlock Text="🔄" FontSize="22"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
+                                        Background="Transparent"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,16,0,0">
+                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                           Width="28"
+                                           Height="28"
+                                           Stretch="Uniform"/>
                                 </Border>
-                                <StackPanel Grid.Column="1"
-                                            VerticalAlignment="Center"
-                                            Margin="12,0,0,0">
-                                    <TextBlock Text="Skynet"
-                                               FontSize="17"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text="Интернет үйлчилгээ"
-                                               FontSize="12"
-                                               Foreground="Gray"/>
-                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Text="SKYNET"
+                                           HorizontalAlignment="Center"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="Black"
+                                           Margin="0,8,0,16"/>
                             </Grid>
                         </Button>
 
                         <!-- CALLY -->
                         <Button Style="{StaticResource MenuButtonStyle}"
                                 Click="BtnCally_Click">
-                            <Grid Margin="16,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="52"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
                                         Width="44" Height="44"
-                                        Background="#F1F5F9"
-                                        CornerRadius="10"
-                                        VerticalAlignment="Center">
-                                    <TextBlock Text="📞" FontSize="22"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
+                                        Background="Transparent"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,16,0,0">
+                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                           Width="28"
+                                           Height="28"
+                                           Stretch="Uniform"/>
                                 </Border>
-                                <StackPanel Grid.Column="1"
-                                            VerticalAlignment="Center"
-                                            Margin="12,0,0,0">
-                                    <TextBlock Text="Cally"
-                                               FontSize="17"
-                                               FontWeight="Bold"/>
-                                    <TextBlock Text="Дуудлагын үйлчилгээ"
-                                               FontSize="12"
-                                               Foreground="Gray"/>
-                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Text="CALLY"
+                                           HorizontalAlignment="Center"
+                                           FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Foreground="Black"
+                                           Margin="0,8,0,16"/>
                             </Grid>
                         </Button>
-
                     </StackPanel>
                 </ScrollViewer>
             </Border>
 
-            <!-- ========================= -->
-            <!-- RIGHT CONTENT AREA        -->
-            <!-- ========================= -->
+            <!-- RIGHT CONTENT AREA -->
             <ContentControl x:Name="MainContent"
                             Grid.Column="1"/>
-
         </Grid>
     </Grid>
 </Window>

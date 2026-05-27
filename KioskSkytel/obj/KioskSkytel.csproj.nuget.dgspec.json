@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Revol\\source\\repos\\KioskSkytel\\KioskSkytel\\KioskSkytel.csproj": {}
+    "C:\\Users\\HP\\Documents\\Kiosk\\KioskSkytel\\KioskSkytel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Revol\\source\\repos\\KioskSkytel\\KioskSkytel\\KioskSkytel.csproj": {
+    "C:\\Users\\HP\\Documents\\Kiosk\\KioskSkytel\\KioskSkytel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Revol\\source\\repos\\KioskSkytel\\KioskSkytel\\KioskSkytel.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Documents\\Kiosk\\KioskSkytel\\KioskSkytel.csproj",
         "projectName": "KioskSkytel",
-        "projectPath": "C:\\Users\\Revol\\source\\repos\\KioskSkytel\\KioskSkytel\\KioskSkytel.csproj",
-        "packagesPath": "C:\\Users\\Revol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Revol\\source\\repos\\KioskSkytel\\KioskSkytel\\obj\\",
+        "projectPath": "C:\\Users\\HP\\Documents\\Kiosk\\KioskSkytel\\KioskSkytel.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Documents\\Kiosk\\KioskSkytel\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Revol\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
