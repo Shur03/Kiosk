@@ -41,7 +41,7 @@ namespace KioskSkytel {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 207 "..\..\..\MainWindow.xaml"
+        #line 209 "..\..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ContentControl MainContent;
         
@@ -60,7 +60,7 @@ namespace KioskSkytel {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KioskSkytel;component/mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KioskSkytel;V1.0.0.0;component/mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -80,7 +80,7 @@ namespace KioskSkytel {
             {
             case 1:
             
-            #line 65 "..\..\..\MainWindow.xaml"
+            #line 66 "..\..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.BtnSkytel_Click);
             
             #line default
@@ -88,7 +88,7 @@ namespace KioskSkytel {
             return;
             case 2:
             
-            #line 93 "..\..\..\MainWindow.xaml"
+            #line 95 "..\..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.BtnSkymedia_Click);
             
             #line default
@@ -96,7 +96,7 @@ namespace KioskSkytel {
             return;
             case 3:
             
-            #line 121 "..\..\..\MainWindow.xaml"
+            #line 123 "..\..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.BtnGoPlus_Click);
             
             #line default
@@ -104,7 +104,7 @@ namespace KioskSkytel {
             return;
             case 4:
             
-            #line 149 "..\..\..\MainWindow.xaml"
+            #line 151 "..\..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.BtnSkynet_Click);
             
             #line default
@@ -112,7 +112,7 @@ namespace KioskSkytel {
             return;
             case 5:
             
-            #line 177 "..\..\..\MainWindow.xaml"
+            #line 179 "..\..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.BtnCally_Click);
             
             #line default
