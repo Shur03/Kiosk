@@ -9,13 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="KioskApp.UI\ViewModels\**" />
-    <EmbeddedResource Remove="KioskApp.UI\ViewModels\**" />
-    <None Remove="KioskApp.UI\ViewModels\**" />
-    <Page Remove="KioskApp.UI\ViewModels\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="KioskApp.UI\Assets\images\favicon.ico" />
     <None Remove="KioskApp.UI\Assets\images\lottery.jpg" />
     <None Remove="KioskApp.UI\Assets\images\mongoldoo.png" />

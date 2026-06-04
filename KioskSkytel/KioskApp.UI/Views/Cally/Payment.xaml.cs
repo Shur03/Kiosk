@@ -1,20 +1,11 @@
 ﻿using KioskApp.Services.Database;
 using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using KioskSkytel.KioskApp.UI.Views;
 
 namespace KioskSkytel.KioskApp.UI.Views.Cally
 {
@@ -74,8 +65,7 @@ namespace KioskSkytel.KioskApp.UI.Views.Cally
 
             if (!exists)
             {
-                MessageBox.Show("Оруулсан дугаар буруу байна.");
-                Console.WriteLine("Алдаа", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Оруулсан дугаар буруу байна.", "Анхаар", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -134,13 +124,6 @@ namespace KioskSkytel.KioskApp.UI.Views.Cally
         {
             DialogResult = false;
             Close();
-        }
-
-        private void NumPadGrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            double btnSize = (NumPadGrid.ActualWidth - 48) / 3;
-            foreach (var row in NumPadGrid.RowDefinitions)
-                row.Height = new GridLength(btnSize);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

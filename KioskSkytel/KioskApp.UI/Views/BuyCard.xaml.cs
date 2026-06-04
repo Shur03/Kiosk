@@ -1,26 +1,26 @@
 ﻿using System.Windows;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using KioskApp.Models;
 using KioskApp.Services;
 using KioskApp.Services.Database;
-using KioskSkytel.KioskApp.UI.Helpers;
+using KioskSkytel.KioskApp.UI.ViewModels;
 
 namespace KioskSkytel.KioskApp.UI.Views
 {
     public partial class BuyCard : Window
     {
-        public ObservableCollection<Card> Cards { get; } = new();
-        public ICommand BuyCommand { get; }
+        private readonly BuyCardViewModel _viewModel;
 
         public BuyCard()
         {
             InitializeComponent();
-            BuyCommand = new RelayCommand(p => OnBuy(p));
-            DataContext = this;
+
+            _viewModel = new BuyCardViewModel();
+            _viewModel.MessageRequested += ViewModel_MessageRequested;
+            _viewModel.RequestClose += ViewModel_RequestClose;
+
+            DataContext = _viewModel;
             Loaded += BuyCard_Loaded;
         }
 
@@ -28,7 +28,9 @@ namespace KioskSkytel.KioskApp.UI.Views
         {
             try
             {
-                await LoadCardsAsync();
+                var connectionString = await GetDatabaseConnectionStringAsync();
+                var repository = new CardRepository(new DatabaseService(connectionString));
+                await _viewModel.LoadCardsAsync(repository);
             }
             catch (Exception ex)
             {
@@ -36,17 +38,14 @@ namespace KioskSkytel.KioskApp.UI.Views
             }
         }
 
-        private async Task LoadCardsAsync()
+        private void ViewModel_MessageRequested(object? sender, MessageRequestedEventArgs e)
         {
-            var connectionString = await GetDatabaseConnectionStringAsync();
-            var repository = new CardRepository(new DatabaseService(connectionString));
-            var cards = await repository.GetAllCardsAsync();
+            MessageBox.Show(e.Message, e.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-            Cards.Clear();
-            foreach (var card in cards)
-            {
-                Cards.Add(card);
-            }
+        private void ViewModel_RequestClose(object? sender, System.EventArgs e)
+        {
+            Close();
         }
 
         private static async Task<string> GetDatabaseConnectionStringAsync()
@@ -75,19 +74,6 @@ namespace KioskSkytel.KioskApp.UI.Views
             string password = databaseSection.TryGetProperty("Password", out var pw) ? pw.GetString() ?? string.Empty : string.Empty;
 
             return $"Host={host};Port={port};Username={username};Password={password};Database={name};Ssl Mode=Disable;";
-        }
-
-        private void OnBuy(object? param)
-        {
-            if (param is Card pkg)
-            {
-                MessageBox.Show($"Сонгосон багц: {pkg.Price} - {pkg.DataGB}GB / {pkg.Duration}", "Худалдан авах", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

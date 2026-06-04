@@ -115,7 +115,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     Cursor="Hand"
-                    Click="CloseButton_Click"/>
+                    Command="{Binding CloseCommand}"/>
         </DockPanel>
 
         <!-- Scrollable card grid -->
@@ -157,7 +157,7 @@
                                            Margin="0,3,0,0"/>
                                 <Button Content="Сонгох"
                                         Style="{StaticResource BuyButton}"
-                                        Command="{Binding DataContext.BuyCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        Command="{Binding BuyCommand}"
                                         CommandParameter="{Binding}"/>
                             </StackPanel>
                         </Border>
