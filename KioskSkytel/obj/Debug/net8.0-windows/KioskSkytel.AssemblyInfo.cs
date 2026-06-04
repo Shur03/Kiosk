@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KioskSkytel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68409cb4c5ca8687ec5e2da9a6e9e3524d18a105")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce86481a26d00a1e51fb3a0d59c206fafa8bc374")]
 [assembly: System.Reflection.AssemblyProductAttribute("KioskSkytel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KioskSkytel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

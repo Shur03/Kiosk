@@ -1,0 +1,264 @@
+﻿<UserControl x:Class="KioskSkytel.KioskApp.UI.Views.NewNumberForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="450"
+             Background="#F0F4F8">
+
+    <UserControl.Resources>
+
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- ComboBox Style -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#CBD5E1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,5,0,15"/>
+            <Setter Property="Padding" Value="8,0"/>
+        </Style>
+
+        <!-- Label Style -->
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#0D1B2A"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <!-- Main Button Style -->
+        <Style x:Key="MainButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+
+        <Border Background="White"
+                CornerRadius="16"
+                Padding="25">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <Border Grid.Row="0"
+                        Background="#1565C0"
+                        CornerRadius="12"
+                        Height="70"
+                        Margin="0,0,0,25">
+
+                    <Grid>
+
+                        <TextBlock Text="Шинэ дугаар авах"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                        <!-- Close Button -->
+                        <Button x:Name="CloseButton"
+                                Width="32"
+                                Height="32"
+                                Content="✕"
+                                Background="Transparent"
+                                Foreground="White"
+                                BorderBrush="White"
+                                BorderThickness="1"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0,0,15,0"
+                                Cursor="Hand"
+                                Click="CloseButton_Click">
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="16">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#E53935"/>
+                                            <Setter Property="BorderBrush" Value="#E53935"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                        </Button>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- Content -->
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+
+                    <StackPanel>
+
+                        <!-- Service Type -->
+                        <Label Content="Үйлчилгээний төрөл"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,5,0,20">
+
+                            <RadioButton x:Name="PrepaidRadio"
+                                         Content="Урьдчилсан төлбөрт"
+                                         GroupName="ServiceType"
+                                         IsChecked="True"
+                                         Margin="0,0,20,0"
+                                         FontSize="13"
+                                         Foreground="#0D1B2A"
+                                         Checked="ServiceType_Checked"/>
+
+                            <RadioButton x:Name="PostpaidRadio"
+                                         Content="Дараа төлбөрт"
+                                         GroupName="ServiceType"
+                                         FontSize="13"
+                                         Foreground="#0D1B2A"
+                                         Checked="ServiceType_Checked"/>
+                        </StackPanel>
+
+                        <!-- Phone Number -->
+                        <Label Content="Утасны дугаар сонгох"/>
+
+                        <ComboBox x:Name="PhoneNumberCombo"
+                                  SelectionChanged="PhoneNumberCombo_SelectionChanged">
+
+                            <ComboBoxItem Content="8811 0001" IsSelected="True"/>
+                            <ComboBoxItem Content="8811 0002"/>
+                            <ComboBoxItem Content="8811 0003"/>
+                            <ComboBoxItem Content="8811 0005"/>
+                            <ComboBoxItem Content="8811 0008"/>
+
+                        </ComboBox>
+
+                        <!-- Custom Number -->
+                        <CheckBox x:Name="CustomNumberCheck"
+                                  Content="Өөрийн дугаар оруулах"
+                                  Margin="0,0,0,10"
+                                  FontSize="13"
+                                  Foreground="#0D1B2A"
+                                  Checked="CustomNumberCheck_Checked"
+                                  Unchecked="CustomNumberCheck_Unchecked"/>
+
+                        <TextBox x:Name="CustomNumberBox"
+                                 IsEnabled="False"
+                                 MaxLength="8"
+                                 KeyUp="CustomNumberBox_KeyUp"/>
+
+                        <TextBlock x:Name="NumberErrorText"
+                                   Text=""
+                                   Foreground="Red"
+                                   FontSize="11"
+                                   Margin="0,-10,0,10"
+                                   Visibility="Collapsed"/>
+
+                        <!-- User Info -->
+                        <Label Content="Хэрэглэгчийн нэр"/>
+                        <TextBox x:Name="UserNameBox"/>
+
+                        <Label Content="Имэйл хаяг"/>
+                        <TextBox x:Name="EmailBox"/>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+                <!-- Footer Buttons -->
+                <Grid Grid.Row="2"
+                      Margin="0,20,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Status -->
+                    <TextBlock x:Name="StatusMessage"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Foreground="#1565C0"
+                               FontSize="12"/>
+
+                    <!-- Cancel -->
+                    <Button x:Name="CancelButton"
+                            Grid.Column="1"
+                            Width="110"
+                            Margin="0,0,10,0"
+                            Content="Цуцлах"
+                            Background="#E2E8F0"
+                            Foreground="#0D1B2A"
+                            BorderBrush="#CBD5E1"
+                            BorderThickness="1"
+                            Style="{StaticResource MainButtonStyle}"
+                            Click="CancelButton_Click"/>
+
+                    <!-- Confirm -->
+                    <Button x:Name="ConfirmButton"
+                            Grid.Column="2"
+                            Width="140"
+                            Content="Баталгаажуулах"
+                            Background="#1565C0"
+                            Foreground="White"
+                            Style="{StaticResource MainButtonStyle}"
+                            Click="ConfirmButton_Click"/>
+
+                </Grid>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

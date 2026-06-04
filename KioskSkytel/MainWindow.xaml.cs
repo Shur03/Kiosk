@@ -1,16 +1,35 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using KioskSkytel.KioskApp.UI.Views;
+using KioskSkytel.KioskApp.UI.Views.SkyMedia;
+using KioskSkytel.KioskApp.UI.Views.Cally;
+using KioskSkytel.KioskApp.UI.Views.SkyNet;
+using KioskSkytel.KioskApp.UI.Views.GoPlus;
 using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace KioskSkytel
 {
     public partial class MainWindow : Window
     {
+        private Button? _selectedButton;
+        private readonly List<Button> _menuButtons = new List<Button>();
         public MainWindow()
         {
             InitializeComponent();
+            RegisterMenuButtons();
+            SelectMenu(BtnSkytel);
             ShowWelcomeScreen();
+
+        }
+
+        private void RegisterMenuButtons()
+        {
+            _menuButtons.Add(BtnSkytel);
+            _menuButtons.Add(BtnSkymedia);
+            _menuButtons.Add(BtnGoPlus);
+            _menuButtons.Add(BtnSkynet);
+            _menuButtons.Add(BtnCally);
         }
 
         // =========================
@@ -18,36 +37,63 @@ namespace KioskSkytel
         // =========================
         private void ShowWelcomeScreen()
         {
-            MainContent.Content = new Skytel(); 
+            MainContent.Content = new Skytel();
         }
 
         // =========================
         // MENU BUTTON EVENTS
         // =========================
 
+
+        private void SelectMenu(Button button)
+        {
+            // Бүх товчлуурын сонголтыг цэвэрлэх
+            foreach (var btn in _menuButtons)
+                btn.Tag = null;
+
+            // Сонгогдсон товчлуурт Tag өгөх
+            button.Tag = "Selected";
+            _selectedButton = button;
+        }
+
         private void BtnSkytel_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is Button button)
+                SelectMenu(button);
+
             MainContent.Content = new Skytel(); // MainContent is ContentControl
         }
 
         private void BtnSkymedia_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = CreatePlaceholderView("SKYMEDIA", "Медиа үйлчилгээ");
+            if (sender is Button button)
+                SelectMenu(button);
+
+            MainContent.Content = new SkyMedia();
         }
 
         private void BtnGoPlus_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = CreatePlaceholderView("GO+", "GO+ үйлчилгээ");
+            if (sender is Button button)
+                SelectMenu(button);
+
+            MainContent.Content = new GoPlus();
         }
 
         private void BtnSkynet_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = CreatePlaceholderView("SKYNET", "Интернет үйлчилгээ");
+            if (sender is Button button)
+                SelectMenu(button);
+
+            MainContent.Content = new SkyNet();
         }
 
         private void BtnCally_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = CreatePlaceholderView("CALLY", "Дуудлагын үйлчилгээ");
+            if (sender is Button button)
+                SelectMenu(button);
+
+            MainContent.Content = new Cally();
         }
 
         // =========================

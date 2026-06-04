@@ -8,206 +8,243 @@
         Stylus.IsPressAndHoldEnabled="False">
 
     <Window.Resources>
-        <!-- Reusable menu button style - no radius, full height -->
-        <Style x:Key="MenuButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Height" Value="90"/>
+        <Style x:Key="MenuButtonStyle"
+                TargetType="Button">
+            <Setter Property="Background"
+                    Value="Transparent"/>
+            <Setter Property="BorderThickness"
+                    Value="0"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+            <Setter Property="Margin"
+                    Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="MenuBorder"
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter/>
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <DockPanel>
+                                <Border x:Name="SelectionBar"
+                                        Width="4"
+                                        Background="Transparent"
+                                        DockPanel.Dock="Left"/>
+                                <ContentPresenter/>
+                            </DockPanel>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MenuBorder" Property="Background" Value="#F0F9FF"/>
+                            <Trigger Property="IsMouseOver"
+                                    Value="True">
+                                <Setter TargetName="MenuBorder"
+                                        Property="Background"
+                                        Value="#F0F9FF"/>
                             </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="MenuBorder" Property="Background" Value="#DBEAFE"/>
+                            <Trigger Property="IsPressed"
+                                    Value="True">
+                                <Setter TargetName="MenuBorder"
+                                        Property="Background"
+                                        Value="#DBEAFE"/>
                             </Trigger>
+                            <!-- Сонгогдсон үед зүүн зураас + цайвар дэвсгэр -->
+                            <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}"
+                                    Value="Selected">
+                                <Setter TargetName="MenuBorder"
+                                        Property="Background"
+                                        Value="#EFF6FF"/>
+                                <Setter TargetName="SelectionBar"
+                                        Property="Background"
+                                        Value="#1565C0"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Зураг: сонгогдоогүй үед бүдэг -->
+        <Style x:Key="MenuImageStyle"
+                TargetType="Image">
+            <Setter Property="Opacity"
+                    Value="0.4"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}"
+                             Value="Selected">
+                    <Setter Property="Opacity"
+                            Value="1.0"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Текст: сонгогдоогүй үед саарал, сонгогдсон үед цэнхэр -->
+        <Style x:Key="MenuTextStyle"
+                TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value="#64748B"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}"
+                             Value="Selected">
+                    <Setter Property="Foreground"
+                            Value="#1565C0"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/KioskApp.UI/Assets/images/mongoldoo.png"
-                        Stretch="UniformToFill"/>
-        </Grid.Background>
+    <Grid Background="White">
 
-        <!-- Dark overlay -->
-        <Rectangle Fill="#009EFA" Opacity="0.75"/>
 
-        <!-- MAIN LAYOUT: Left menu + Right content -->
+
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="340"/>
-                <ColumnDefinition Width="*"/>
+                <!-- Цэс: фиксед 200px -->
+                <ColumnDefinition Width="200"/>
+                <!-- Контент: үлдсэн хэсгийн 3/5 -->
+                <ColumnDefinition Width="3*"/>
+                <!-- Баруун хэсэг: үлдсэн хэсгийн 2/5 -->
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- LEFT MENU - Full height, no gaps -->
+            <!-- LEFT MENU -->
             <Border Grid.Column="0"
-                    Background="#0F172A"
+                    Background="White"
+                    Width="200"
                     Opacity="0.96">
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-                              PanningMode="VerticalFirst"
-                              Background="White">
-                    <StackPanel Margin="0">
-                        <!-- SKYTEL -->
-                        <Button Style="{StaticResource MenuButtonStyle}"
-                                Click="BtnSkytel_Click"
-                                >
-                            <Grid Margin="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.Row="0"
-                                        Width="44" Height="44"
-                                        Background="Transparent"
-                                        HorizontalAlignment="Center"
-                                        Margin="0,16,0,0">
-                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
-                                           Width="28"
-                                           Height="28"
-                                           Stretch="Uniform"/>
-                                </Border>
-                                <TextBlock Grid.Row="1"
-                                           Text="SKYTEL"
-                                           HorizontalAlignment="Center"
-                                           FontSize="14"
-                                           FontWeight="SemiBold"
-                                           Foreground="Black"
-                                           Margin="0,8,0,16"/>
-                            </Grid>
-                        </Button>
+                <UniformGrid Columns="1"
+                        Rows="5">
 
-                        <!-- SKYMEDIA -->
-                        <Button Style="{StaticResource MenuButtonStyle}"
-                                Click="BtnSkymedia_Click">
-                            <Grid Margin="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.Row="0"
-                                        Width="44" Height="44"
-                                        Background="Transparent"
-                                        HorizontalAlignment="Center"
-                                        Margin="0,16,0,0">
-                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
-                                           Width="28"
-                                           Height="28"
-                                           Stretch="Uniform"/>
-                                </Border>
-                                <TextBlock Grid.Row="1"
-                                           Text="SKYMEDIA"
-                                           HorizontalAlignment="Center"
-                                           FontSize="14"
-                                           FontWeight="SemiBold"
-                                           Foreground="Black"
-                                           Margin="0,8,0,16"/>
-                            </Grid>
-                        </Button>
+                    <!-- SKYTEL -->
+                    <Button x:Name="BtnSkytel"
+                            Style="{StaticResource MenuButtonStyle}"
+                            BorderBrush="#E2E8F0"
+                            BorderThickness="0,0,0,1"
+                            Click="BtnSkytel_Click">
+                        <StackPanel HorizontalAlignment="Center"
+                                Margin="0,16,0,16">
+                            <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                   Width="28"
+                                    Height="28"
+                                    Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource MenuImageStyle}"/>
+                            <TextBlock Text="SKYTEL"
+                                       FontSize="13"
+                                    FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,8,0,0"
+                                       Style="{StaticResource MenuTextStyle}"/>
+                        </StackPanel>
+                    </Button>
 
-                        <!-- GO+ -->
-                        <Button Style="{StaticResource MenuButtonStyle}"
-                                Click="BtnGoPlus_Click">
-                            <Grid Margin="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.Row="0"
-                                        Width="44" Height="44"
-                                        Background="Transparent"
-                                        HorizontalAlignment="Center"
-                                        Margin="0,16,0,0">
-                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
-                                           Width="28"
-                                           Height="28"
-                                           Stretch="Uniform"/>
-                                </Border>
-                                <TextBlock Grid.Row="1"
-                                           Text="GO+"
-                                           HorizontalAlignment="Center"
-                                           FontSize="14"
-                                           FontWeight="SemiBold"
-                                           Foreground="Black"
-                                           Margin="0,8,0,16"/>
-                            </Grid>
-                        </Button>
+                    <!-- SKYMEDIA -->
+                    <Button x:Name="BtnSkymedia"
+                            Style="{StaticResource MenuButtonStyle}"
+                            BorderBrush="#E2E8F0"
+                            BorderThickness="0,0,0,1"
+                            Click="BtnSkymedia_Click">
+                        <StackPanel HorizontalAlignment="Center"
+                                Margin="0,16,0,16">
+                            <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                   Width="28"
+                                    Height="28"
+                                    Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource MenuImageStyle}"/>
+                            <TextBlock Text="SKYMEDIA"
+                                       FontSize="13"
+                                    FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,8,0,0"
+                                       Style="{StaticResource MenuTextStyle}"/>
+                        </StackPanel>
+                    </Button>
 
-                        <!-- SKYNET -->
-                        <Button Style="{StaticResource MenuButtonStyle}"
-                                Click="BtnSkynet_Click">
-                            <Grid Margin="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.Row="0"
-                                        Width="44" Height="44"
-                                        Background="Transparent"
-                                        HorizontalAlignment="Center"
-                                        Margin="0,16,0,0">
-                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
-                                           Width="28"
-                                           Height="28"
-                                           Stretch="Uniform"/>
-                                </Border>
-                                <TextBlock Grid.Row="1"
-                                           Text="SKYNET"
-                                           HorizontalAlignment="Center"
-                                           FontSize="14"
-                                           FontWeight="SemiBold"
-                                           Foreground="Black"
-                                           Margin="0,8,0,16"/>
-                            </Grid>
-                        </Button>
+                    <!-- GO+ -->
+                    <Button x:Name="BtnGoPlus"
+                            Style="{StaticResource MenuButtonStyle}"
+                            BorderBrush="#E2E8F0"
+                            BorderThickness="0,0,0,1"
+                            Click="BtnGoPlus_Click">
+                        <StackPanel HorizontalAlignment="Center"
+                                Margin="0,16,0,16">
+                            <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                   Width="28"
+                                    Height="28"
+                                    Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource MenuImageStyle}"/>
+                            <TextBlock Text="GO+"
+                                       FontSize="13"
+                                    FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,8,0,0"
+                                       Style="{StaticResource MenuTextStyle}"/>
+                        </StackPanel>
+                    </Button>
 
-                        <!-- CALLY -->
-                        <Button Style="{StaticResource MenuButtonStyle}"
-                                Click="BtnCally_Click">
-                            <Grid Margin="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Border Grid.Row="0"
-                                        Width="44" Height="44"
-                                        Background="Transparent"
-                                        HorizontalAlignment="Center"
-                                        Margin="0,16,0,0">
-                                    <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
-                                           Width="28"
-                                           Height="28"
-                                           Stretch="Uniform"/>
-                                </Border>
-                                <TextBlock Grid.Row="1"
-                                           Text="CALLY"
-                                           HorizontalAlignment="Center"
-                                           FontSize="14"
-                                           FontWeight="SemiBold"
-                                           Foreground="Black"
-                                           Margin="0,8,0,16"/>
-                            </Grid>
-                        </Button>
-                    </StackPanel>
-                </ScrollViewer>
+                    <!-- SKYNET -->
+                    <Button x:Name="BtnSkynet"
+                            Style="{StaticResource MenuButtonStyle}"
+                            BorderBrush="#E2E8F0"
+                            BorderThickness="0,0,0,1"
+                            Click="BtnSkynet_Click">
+                        <StackPanel HorizontalAlignment="Center"
+                                Margin="0,16,0,16">
+                            <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                   Width="28"
+                                    Height="28"
+                                    Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource MenuImageStyle}"/>
+                            <TextBlock Text="SKYNET"
+                                       FontSize="13"
+                                    FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,8,0,0"
+                                       Style="{StaticResource MenuTextStyle}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- CALLY -->
+                    <Button x:Name="BtnCally"
+                            Style="{StaticResource MenuButtonStyle}"
+                            BorderThickness="0"
+                            Click="BtnCally_Click">
+                        <StackPanel HorizontalAlignment="Center"
+                                Margin="0,16,0,16">
+                            <Image Source="/KioskApp.UI/Assets/images/favicon.ico"
+                                   Width="28"
+                                    Height="28"
+                                    Stretch="Uniform"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource MenuImageStyle}"/>
+                            <TextBlock Text="CALLY"
+                                       FontSize="13"
+                                    FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,8,0,0"
+                                       Style="{StaticResource MenuTextStyle}"/>
+                        </StackPanel>
+                    </Button>
+
+                </UniformGrid>
             </Border>
 
-            <!-- RIGHT CONTENT AREA -->
+            <!-- CONTENT: 3/5 -->
             <ContentControl x:Name="MainContent"
                             Grid.Column="1"/>
+
+            <!-- RIGHT PANEL: 2/5 -->
+            <Border Grid.Column="2">
+
+                <Image Source="/KioskApp.UI/Assets/images/lottery.jpg"
+                        VerticalAlignment="Top">
+
+                </Image>
+            </Border>
+
         </Grid>
     </Grid>
 </Window>

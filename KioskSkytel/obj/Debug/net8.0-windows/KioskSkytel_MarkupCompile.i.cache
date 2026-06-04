@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\HP\Documents\Kiosk\KioskSkytel\App.xaml
-21038842135
-
-111698890871
-198195805267
-KioskApp.UI\Views\Skytel.xaml;MainWindow.xaml;
+14355412198
+222123425737
+31-2098267659
+204-1275967091
+KioskApp.UI\Views\BuyCard.xaml;KioskApp.UI\Views\Cally\Cally.xaml;KioskApp.UI\Views\Cally\Payment.xaml;KioskApp.UI\Views\GoPlus\GoPlus.xaml;KioskApp.UI\Views\GoPlus\GP_Login.xaml;KioskApp.UI\Views\GoPlus\GP_Payment.xaml;KioskApp.UI\Views\NewNumberForm.xaml;KioskApp.UI\Views\PaymentNew.xaml;KioskApp.UI\Views\PhoneInfo.xaml;KioskApp.UI\Views\SkyMedia\AddressChange.xaml;KioskApp.UI\Views\SkyMedia\SkyMedia.xaml;KioskApp.UI\Views\SkyNet\SkyNet.xaml;KioskApp.UI\Views\Skytel.xaml;MainWindow.xaml;
 
 False
 

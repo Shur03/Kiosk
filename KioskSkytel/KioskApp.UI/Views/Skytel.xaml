@@ -3,180 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:KioskSkytel.KioskApp.UI.Views"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             Background="#F0F4F8">
 
-    <Grid>
+    <UserControl.Resources>
+        <Style x:Key="CardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="CardBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="18"
+                                Padding="16,20,16,24">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="CardBorder" Property="BorderBrush" Value="WhiteSmoke"/>
+                                <Setter TargetName="CardBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="-2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="CardBorder" Property="Background" Value="#F1F5F9"/>
+                                <Setter TargetName="CardBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 
-        <!-- HEADER -->
-
-        <!-- MAIN GRID -->
-        <Grid HorizontalAlignment="Center"
-              VerticalAlignment="Center">
-
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled">
+        <Grid x:Name="CardGrid"
+          Margin="12"
+          SizeChanged="CardGrid_SizeChanged">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <!-- CARD 1 -->
-            <Border Grid.Row="0" Grid.Column="0"
-                    Margin="20"
-                    CornerRadius="18"
-                    Background="White"
-                    Width="320" Height="260">
-                <Grid Margin="20">
-
-                    <StackPanel>
-                        <Border Width="60" Height="60"
-                                Background="#F1F5F9"
-                                CornerRadius="12"
-                                HorizontalAlignment="Left">
-
-                            <!-- ICON PLACEHOLDER -->
-                            <TextBlock Text="📄"
-                                       FontSize="26"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"/>
-                        </Border>
-
-                        <TextBlock Text="Шинэ дугаар"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   Margin="0,15,0,0"/>
-
-                        <TextBlock Text="Урьдчилсан болон дараа төлбөрт үйлчилгээний шинэ дугаар"
-                                   FontSize="13"
-                                   Foreground="Gray"
-                                   TextWrapping="Wrap"
-                                   Margin="0,8,0,0"/>
+            <Button Grid.Row="0" Grid.Column="0"
+                Style="{StaticResource CardButtonStyle}"                 
+                Click="BtnNewNumber_Click"
+                    >
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="📄" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Шинэ дугаар" FontSize="18" FontWeight="Bold"
+                           Foreground="DimGray" HorizontalAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
 
 
-                    </StackPanel>
+            <Button Grid.Row="0" Grid.Column="1"
+                Style="{StaticResource CardButtonStyle}"
+                    
+                Click="BtnBuyCard_Click">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="⚡" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Нэгж авах" FontSize="18" FontWeight="Bold"
+                           Foreground="#0D1B2A" HorizontalAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
 
-                </Grid>
-            </Border>
+            <Button Grid.Row="1" Grid.Column="0"
+                Style="{StaticResource CardButtonStyle}"
+                 
+                Click="BtnPayment_Click">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="💳" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Төлбөр төлөх" FontSize="18" FontWeight="Bold"
+                           Foreground="DimGray" HorizontalAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
 
-            <!-- CARD 2 -->
-            <Border Grid.Row="0" Grid.Column="1"
-                    Margin="20"
-                    CornerRadius="18"
-                    Background="White"
-                    Width="320" Height="260">
-                <Grid Margin="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200*"/>
-                        <ColumnDefinition Width="21*"/>
-                        <ColumnDefinition Width="59*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.ColumnSpan="3">
-                        <Border Width="60" Height="60"
-                                Background="#F1F5F9"
-                                CornerRadius="12">
-
-                            <TextBlock Text="⚡"
-                                       FontSize="26"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </Border>
-
-                        <TextBlock Text="Нэгж авах"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   Margin="0,15,0,0"/>
-
-                        <TextBlock Text="Урьдчилсан төлбөрт үйлчилгээний цэнэглэгч картууд"
-                                   FontSize="13"
-                                   Foreground="Gray"
-                                   TextWrapping="Wrap"
-                                   Margin="0,8,0,0"/>
-
-
-                    </StackPanel>
-
-                </Grid>
-            </Border>
-
-            <!-- CARD 3 -->
-            <Border Grid.Row="1" Grid.Column="0"
-                    Margin="20"
-                    CornerRadius="18"
-                    Background="White"
-                    Width="320" Height="260">
-
-                <Grid Margin="20">
-                    <StackPanel>
-
-                        <Border Width="60" Height="60"
-                                Background="#F1F5F9"
-                                CornerRadius="12">
-                            <TextBlock Text="💳"
-                                       FontSize="26"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </Border>
-
-                        <TextBlock Text="Төлбөр төлөх"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   Margin="0,15,0,0"/>
-
-                        <TextBlock Text="Хүссэн газраасаа, хүссэн цагтаа төлбөрөө төлөх боломж"
-                                   FontSize="13"
-                                   Foreground="Gray"
-                                   TextWrapping="Wrap"
-                                   Margin="0,8,0,0"/>
-
-
-
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <!-- CARD 4 -->
-            <Border Grid.Row="1" Grid.Column="1"
-                    Margin="20"
-                    CornerRadius="18"
-                    Background="White"
-                    Width="320" Height="260">
-
-                <Grid Margin="20">
-                    <StackPanel>
-
-                        <Border Width="60" Height="60"
-                                Background="#F1F5F9"
-                                CornerRadius="12">
-                            <TextBlock Text="🔄"
-                                       FontSize="26"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </Border>
-
-                        <TextBlock Text="Сим сэргэх"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   Margin="0,15,0,0"/>
-
-                        <TextBlock Text="Та GoSIM ашиглан хүссэн үедээ симээ сэргээж"
-                                   FontSize="13"
-                                   Foreground="Gray"
-                                   TextWrapping="Wrap"
-                                   Margin="0,8,0,0"/>
-
-
-
-                    </StackPanel>
-                </Grid>
-            </Border>
-
+            <Button Grid.Row="1" Grid.Column="1"
+                Style="{StaticResource CardButtonStyle}"
+               
+                Click="BtnSimRecovery_Click"
+                    >
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="🔄" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Сим сэргэх" FontSize="18" FontWeight="Bold"
+                           Foreground="DimGray" HorizontalAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
         </Grid>
-
-    </Grid>
+    </ScrollViewer>
 </UserControl>

@@ -9,29 +9,54 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="KioskApp.UI\ViewModels\**" />
+    <EmbeddedResource Remove="KioskApp.UI\ViewModels\**" />
+    <None Remove="KioskApp.UI\ViewModels\**" />
+    <Page Remove="KioskApp.UI\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="KioskApp.UI\Assets\images\favicon.ico" />
+    <None Remove="KioskApp.UI\Assets\images\lottery.jpg" />
     <None Remove="KioskApp.UI\Assets\images\mongoldoo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="KioskApp.Core\Interfaces\" />
     <Folder Include="KioskApp.Core\Services\" />
-    <Folder Include="KioskApp.Models\" />
     <Folder Include="KioskApp.Services\Api\" />
     <Folder Include="KioskApp.Services\HardwareMock\" />
     <Folder Include="KioskApp.Services\DTOs\" />
     <Folder Include="KioskApp.Shared\" />
     <Folder Include="KioskApp.UI\Controls\" />
-    <Folder Include="KioskApp.UI\ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="KioskApp.UI\Assets\images\favicon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="KioskApp.UI\Assets\images\lottery.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="KioskApp.UI\Assets\images\mongoldoo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <CardReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.8" />
+    <CardReference Include="Npgsql" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="KioskApp.UI\appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

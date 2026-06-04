@@ -1,6 +1,10 @@
 .vs/
 .vscode/
 
+# Visual Studio cache and generated files
+.vs/**/*.sqlite
+.vs/**/*.db
+
 # User-specific files
 *.suo
 *.user
@@ -13,14 +17,20 @@
 [Oo]bj/
 */bin/
 */obj/
+*.dll
+*.exe
 
 # Rider
 .idea/
+*.DotSettings.user
 
 # NuGet
 *.nupkg
-packages/
+*.nupkg.metadata
+Cards/
 .nuget/
+packages/
+.nuget/packages/
 
 # Publish / artifacts
 publish/
@@ -43,7 +53,14 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
 
 # Other
 *.tmp
 *.temp
+.appsettings.json
+*.baml
+TestResults/
+node_modules/

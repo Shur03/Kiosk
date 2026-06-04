@@ -1,0 +1,412 @@
+﻿<Window x:Class="KioskSkytel.KioskApp.Views.SkyMedia.AddressChange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Хаяг шилжих"
+        Width="700"
+        Height="480"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Window.Resources>
+        <!-- ComboBox style matching the design -->
+        <Style x:Key="KioskComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="52"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#1A1A2E"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#D0D8E8"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="14,0,10,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="10">
+                                <Grid>
+                                    <ContentPresenter x:Name="ContentSite"
+                                                      IsHitTestVisible="False"
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                      Margin="14,0,40,0"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="Placeholder"
+                                               Text="{TemplateBinding Tag}"
+                                               Foreground="#AAAAAA"
+                                               FontSize="17"
+                                               FontFamily="Segoe UI"
+                                               Margin="14,0,40,0"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Visibility="Collapsed"/>
+                                    <Path x:Name="Arrow"
+                                          Data="M 0 0 L 8 8 L 16 0"
+                                          Stroke="#2196F3"
+                                          StrokeThickness="2"
+                                          Fill="Transparent"
+                                          Width="16" Height="8"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,14,0"/>
+                                    <ToggleButton x:Name="ToggleButton"
+                                                  Focusable="False"
+                                                  IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ClickMode="Press"
+                                                  Background="Transparent"
+                                                  BorderThickness="0"
+                                                  HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"
+                                                  Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <Popup x:Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Border x:Name="DropDownBorder"
+                                        Background="White"
+                                        BorderBrush="#D0D8E8"
+                                        BorderThickness="1.5"
+                                        CornerRadius="10"
+                                        MinWidth="{TemplateBinding ActualWidth}"
+                                        MaxHeight="200">
+                                    <ScrollViewer>
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#2196F3"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#2196F3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Read-only TextBox style (for Төлөв field) -->
+        <Style x:Key="ReadOnlyTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="52"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#1A1A2E"/>
+            <Setter Property="Background" Value="#F7F9FC"/>
+            <Setter Property="BorderBrush" Value="#D0D8E8"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="14,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Cancel button style -->
+        <Style x:Key="CancelButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="52"/>
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#555555"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="26">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F0F0F0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Continue button style -->
+        <Style x:Key="ContinueButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="52"/>
+            <Setter Property="MinWidth" Value="190"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg"
+                                CornerRadius="26">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#2196F3" Offset="0"/>
+                                    <GradientStop Color="#1565C0" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Opacity" Value="0.88"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bg" Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Close button style -->
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#2196F3"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="22">
+                            <TextBlock Text="✕"
+                                       FontSize="16"
+                                       FontFamily="Segoe UI"
+                                       Foreground="#2196F3"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E3F2FD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Dim overlay background -->
+    <Border Background="Transparent">
+        <!-- Modal card -->
+        <Border Background="White"
+                CornerRadius="20"
+                Width="660"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Padding="40,34,40,36">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40" ShadowDepth="8" Color="#000000" Opacity="0.13"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Title row -->
+                    <RowDefinition Height="28"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 1: Дүүрэг + Хороо -->
+                    <RowDefinition Height="18"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Row 2: Байр + Төлөв -->
+                    <RowDefinition Height="20"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Info box -->
+                    <RowDefinition Height="28"/>
+                    <!-- Spacer -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Buttons -->
+                </Grid.RowDefinitions>
+
+                <!-- Title + Close button -->
+                <Grid Grid.Row="0">
+                    <TextBlock Text="ХАЯГ ШИЛЖИХ"
+                               FontSize="22"
+                               FontFamily="Segoe UI"
+                               FontWeight="Bold"
+                               Foreground="#1A1A2E"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    <Button Style="{StaticResource CloseButtonStyle}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Click="CloseButton_Click"/>
+                </Grid>
+
+                <!-- Row 1: Дүүрэг + Хороо -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Дүүрэг -->
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Дүүрэг"
+                                   FontSize="14"
+                                   FontFamily="Segoe UI"
+                                   Foreground="#2196F3"
+                                   Margin="2,0,0,6"/>
+                        <ComboBox x:Name="CmbDuureg"
+                                  Style="{StaticResource KioskComboBoxStyle}"
+                                  SelectedIndex="0">
+                            <ComboBoxItem Content="Сүхбаатар"/>
+                            <ComboBoxItem Content="Баянзүрх"/>
+                            <ComboBoxItem Content="Чингэлтэй"/>
+                            <ComboBoxItem Content="Хан-Уул"/>
+                            <ComboBoxItem Content="Баянгол"/>
+                            <ComboBoxItem Content="Налайх"/>
+                            <ComboBoxItem Content="Багануур"/>
+                            <ComboBoxItem Content="Багахангай"/>
+                            <ComboBoxItem Content="Сонгинохайрхан"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Хороо -->
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Хороо"
+                                   FontSize="14"
+                                   FontFamily="Segoe UI"
+                                   Foreground="#2196F3"
+                                   Margin="2,0,0,6"/>
+                        <ComboBox x:Name="CmbHoroo"
+                                  Style="{StaticResource KioskComboBoxStyle}"
+                                  SelectedIndex="0">
+                            <ComboBoxItem Content="6 хороо"/>
+                            <ComboBoxItem Content="1 хороо"/>
+                            <ComboBoxItem Content="2 хороо"/>
+                            <ComboBoxItem Content="3 хороо"/>
+                            <ComboBoxItem Content="4 хороо"/>
+                            <ComboBoxItem Content="5 хороо"/>
+                            <ComboBoxItem Content="7 хороо"/>
+                            <ComboBoxItem Content="8 хороо"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Row 2: Байр + Төлөв -->
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Байр -->
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Байр"
+                                   FontSize="14"
+                                   FontFamily="Segoe UI"
+                                   Foreground="#2196F3"
+                                   Margin="2,0,0,6"/>
+                        <ComboBox x:Name="CmbBair"
+                                  Style="{StaticResource KioskComboBoxStyle}"
+                                  SelectedIndex="0">
+                            <ComboBoxItem Content="2 (Эхлэл-II С... 2011.11.28-)"/>
+                            <ComboBoxItem Content="1 (Эхлэл-I С... 2010.05.01-)"/>
+                            <ComboBoxItem Content="3 (Эхлэл-III С... 2012.03.15-)"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Төлөв (read-only) -->
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Төлөв:"
+                                   FontSize="14"
+                                   FontFamily="Segoe UI"
+                                   Foreground="#2196F3"
+                                   Margin="2,0,0,6"/>
+                        <TextBox x:Name="TxtTuluv"
+                                 Style="{StaticResource ReadOnlyTextBoxStyle}"
+                                 Text="Сүлжээ орсон"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Info hint box -->
+                <Border Grid.Row="6"
+                        Background="#EBF5FF"
+                        BorderBrush="#B3D9F7"
+                        BorderThickness="1.5"
+                        CornerRadius="10"
+                        Padding="18,14">
+                    <TextBlock Text="Та захиалга өгөх хаягаа сонгоно уу."
+                               FontSize="15"
+                               FontFamily="Segoe UI"
+                               Foreground="#2196F3"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <!-- Buttons -->
+                <StackPanel Grid.Row="8"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                    <!-- Болих -->
+                    <Button Style="{StaticResource CancelButtonStyle}"
+                            Click="CancelButton_Click"
+                            Margin="0,0,10,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="✕" FontSize="15" Foreground="#555555" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                            <TextBlock Text="Болих" FontSize="17" FontFamily="Segoe UI" Foreground="#555555" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Үргэлжлүүлэх -->
+                    <Button Style="{StaticResource ContinueButtonStyle}"
+                            Click="ContinueButton_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
+                            <TextBlock Text="Үргэлжлүүлэх" FontSize="17" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text=" ›" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+    </Border>
+</Window>

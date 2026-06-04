@@ -2,6 +2,42 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="KioskApp.UI\Views\BuyCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\Cally\Cally.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\Cally\Payment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\GoPlus\GoPlus.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\GoPlus\GP_Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\GoPlus\GP_Payment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\NewNumberForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\PaymentNew.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\PhoneInfo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\SkyMedia\AddressChange.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\SkyMedia\SkyMedia.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="KioskApp.UI\Views\SkyNet\SkyNet.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="KioskApp.UI\Views\Skytel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

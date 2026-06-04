@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KioskSkytel.KioskApp.UI.Views
+namespace KioskSkytel.KioskApp.Services.Databases
 {
-    internal class SkyMedia
+    internal class PostgresConnection
     {
+
     }
 }
