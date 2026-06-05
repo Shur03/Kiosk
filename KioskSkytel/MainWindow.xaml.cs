@@ -96,6 +96,11 @@ namespace KioskSkytel
             MainContent.Content = new Cally();
         }
 
+        public void ShowSelectNumberType()
+        {
+            MainContent.Content = new SelectNumberType();
+        }
+
         // =========================
         // PLACEHOLDER VIEW
         // =========================

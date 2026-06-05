@@ -9,7 +9,9 @@
       "KioskSkytel/1.0.0": {
         "dependencies": {
           "MaterialDesignThemes": "5.3.2",
-          "Npgsql": "10.0.3"
+          "Npgsql": "10.0.3",
+          "PCSC": "7.0.1",
+          "PCSC.Iso7816": "7.0.1"
         },
         "runtime": {
           "KioskSkytel.dll": {}
@@ -74,6 +76,25 @@
           }
         }
       },
+      "PCSC/7.0.1": {
+        "runtime": {
+          "lib/net8.0/PCSC.dll": {
+            "assemblyVersion": "7.0.1.0",
+            "fileVersion": "7.0.1.0"
+          }
+        }
+      },
+      "PCSC.Iso7816/7.0.1": {
+        "dependencies": {
+          "PCSC": "7.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/PCSC.Iso7816.dll": {
+            "assemblyVersion": "7.0.1.0",
+            "fileVersion": "7.0.1.0"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/9.0.11": {
         "runtime": {
           "lib/net8.0/System.Diagnostics.DiagnosticSource.dll": {
@@ -131,6 +152,20 @@
       "sha512": "sha512-7nb5YzXuvWWJxB0J8DiyL3we+X4FOctZrt0fIBnucOIaIevFEEwGQVZKtiu9olXdlNAK1eNgqSral6r/jlhI4w==",
       "path": "npgsql/10.0.3",
       "hashPath": "npgsql.10.0.3.nupkg.sha512"
+    },
+    "PCSC/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J7LdZ4ICGeFBpIQA2y2TrsUM0juWU3lvNUY6Em164F33hlLmsnnDmqVSa4fwp9sGCfKawRK3FkSFh7GYnXt7bA==",
+      "path": "pcsc/7.0.1",
+      "hashPath": "pcsc.7.0.1.nupkg.sha512"
+    },
+    "PCSC.Iso7816/7.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-woFy0SZbE9o0Lh8LpzEOM/I0wTEy9/3sMHBaYWQ8a59C/4a68LJp+eCGu/0ZZAbYBxF+OrRZGmwP2Ldl85FvJQ==",
+      "path": "pcsc.iso7816/7.0.1",
+      "hashPath": "pcsc.iso7816.7.0.1.nupkg.sha512"
     },
     "System.Diagnostics.DiagnosticSource/9.0.11": {
       "type": "package",

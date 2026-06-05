@@ -1,17 +1,19 @@
-﻿using System;
+﻿using KioskApp.Models;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using KioskApp.Models;
-using KioskSkytel;
 
 namespace KioskSkytel.KioskApp.UI.Views
 {
-    public partial class Skytel : UserControl
+    public partial class SelectNumberType : UserControl
     {
         private Border _overlayBorder;
 
-        public Skytel()
+        public Window Owner { get; internal set; }
+
+        public SelectNumberType()
         {
             InitializeComponent();
             this.Loaded += Skytel_Loaded;
@@ -34,13 +36,13 @@ namespace KioskSkytel.KioskApp.UI.Views
             }
         }
 
-        private void BtnNewNumber_Click(object sender, RoutedEventArgs e)
-        {
-            if (Window.GetWindow(this) is MainWindow mainWindow)
-            {
-                mainWindow.ShowSelectNumberType();
-            }
-        }
+        //private void BtnNewNumber_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var window = new SelectNumberType();
+        //    window.Owner = Window.GetWindow(this);
+        //    window.ShowDialog();
+
+        //}
 
         private void BtnPayment_Click(object sender, RoutedEventArgs e)
         {

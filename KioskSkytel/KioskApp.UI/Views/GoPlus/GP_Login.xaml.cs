@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using KioskSkytel.KioskApp.Views.GoPlus;
+using KioskSkytel.KioskApp.UI.Views.GoPlus;
 
 namespace KioskSkytel.KioskApp.Views
 {
@@ -39,7 +39,7 @@ namespace KioskSkytel.KioskApp.Views
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
 
-            var window = new GP_Payment();
+            var window = new GP_Card();
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
         }

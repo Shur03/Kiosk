@@ -113,7 +113,7 @@ namespace KioskSkytel.KioskApp.UI.Views.Cally
             var dbService = new DatabaseService(connStr);
             await using var conn = await dbService.GetOpenConnectionAsync();
 
-            var sql = "SELECT 1 FROM public.phone_numbers WHERE phone_number = @p LIMIT 1";
+            var sql = "SELECT 1 FROM public.accounts WHERE account_number = @p LIMIT 1";
             await using var cmd = new NpgsqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@p", number);
             var res = await cmd.ExecuteScalarAsync();

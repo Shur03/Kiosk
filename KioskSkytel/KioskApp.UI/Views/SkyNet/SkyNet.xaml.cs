@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using KioskApp.Models;
+using KioskSkytel.KioskApp.UI.Views;
 
 namespace KioskSkytel.KioskApp.UI.Views.SkyNet
 {
@@ -29,7 +31,7 @@ namespace KioskSkytel.KioskApp.UI.Views.SkyNet
 
         private void BtnPayment_Click(object sender, RoutedEventArgs e)
         {
-            var window = new PaymentNew();
+            var window = new AccountInputForm(ServiceType.SKYNET);
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
         }

@@ -29,7 +29,7 @@ namespace KioskApp.Services
                     {
                         users.Add(new User
                         {
-                            Id = reader["id"].ToString(),
+                            Id = reader.GetInt32(reader.GetOrdinal("id")),
                             FirstName = reader["first_name"].ToString(),
                             LastName = reader["last_name"].ToString(),
                             RegisterNumber = reader["register_number"].ToString()
@@ -39,26 +39,6 @@ namespace KioskApp.Services
             }
 
             return users;
-        }
-
-        public async Task<int> InsertUserAsync(User user)
-        {
-            using (var connection = await _databaseService.GetOpenConnectionAsync())
-            {
-                var query = @"
-                    INSERT INTO users (id, first_name, last_name, register_number) 
-                    VALUES (@id, @firstName, @lastName, @registerNumber)";
-
-                using (var command = new NpgsqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id", user.Id);
-                    command.Parameters.AddWithValue("@firstName", user.FirstName);
-                    command.Parameters.AddWithValue("@lastName", user.LastName);
-                    command.Parameters.AddWithValue("@registerNumber", user.RegisterNumber);
-
-                    return await command.ExecuteNonQueryAsync();
-                }
-            }
         }
     }
 }

@@ -92,7 +92,7 @@
                 <!-- Spacer -->
                 <Grid Grid.Row="1"/>
 
-                <!-- Row 2: Утасны дугаар -->
+                <!-- Row 2: Данс / Account -->
                 <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -100,11 +100,11 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0"
                           Margin="0,0,0,14">
-                        <TextBlock Text="Утасны дугаар"
+                        <TextBlock Text="Данс"
                                    FontSize="15"
                                    Foreground="#888888"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding PhoneNumber}"
+                        <TextBlock Text="{Binding AccountNumber}"
                                    FontSize="15"
                                    FontWeight="Normal"
                                    Foreground="MediumBlue"
@@ -129,7 +129,7 @@
                                    FontSize="15"
                                    Foreground="#888888"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding Bundle}"
+                        <TextBlock Text="{Binding BundleName}"
                                    FontSize="15"
                                    FontWeight="Bold"
                                    Foreground="MediumBlue"
@@ -148,7 +148,7 @@
                                FontSize="15"
                                Foreground="#888888"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding UserName}"
+                    <TextBlock Text="{Binding FullName}"
                                FontSize="15"
                                FontWeight="Bold"
                                Foreground="MediumBlue"

@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using KioskSkytel.KioskApp.Views.SkyMedia;
+using KioskApp.Models;
+using KioskSkytel.KioskApp.UI.Views;
 
 namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
 {
@@ -22,7 +24,7 @@ namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
     /// </summary>
     public partial class SkyMedia : UserControl
     {
-        private Border _overlayBorder;
+        private Border? _overlayBorder;
         public SkyMedia()
         {
             InitializeComponent();
@@ -38,23 +40,6 @@ namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
                 CardGrid.RowDefinitions[0].Height = new GridLength(buttonSize);
             }
             //CardGrid.RowDefinitions[1].Height = new GridLength(buttonSize);
-        }
-
-
-        private void BtnPayment_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new PaymentNew();
-            window.Owner = Window.GetWindow(this);
-            window.ShowDialog();
-
-            //if (window.ShowDialog() == true)
-            //{
-            //    MessageBox.Show(
-            //        $"Дугаар: {window.PhoneNumber}\nТөлбөр амжилттай хийгдлээ.",
-            //        "Амжилттай",
-            //        MessageBoxButton.OK,
-            //        MessageBoxImage.Information);
-            //}
         }
 
         private void BtnBuyCard_Click(object sender, RoutedEventArgs e)

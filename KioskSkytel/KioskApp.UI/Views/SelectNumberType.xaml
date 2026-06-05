@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="KioskSkytel.KioskApp.UI.Views.SelectNumberType"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Background="#F0F4F8">
+
+    <UserControl.Resources>
+        <Style x:Key="CardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="CardBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="18"
+                                Padding="16,20,16,24">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="CardBorder" Property="BorderBrush" Value="WhiteSmoke"/>
+                                <Setter TargetName="CardBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="-2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="CardBorder" Property="Background" Value="#F1F5F9"/>
+                                <Setter TargetName="CardBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled">
+        <Grid x:Name="CardGrid"
+          Margin="12"
+          SizeChanged="CardGrid_SizeChanged">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                Style="{StaticResource CardButtonStyle}"                 
+                Click="BtnPayment_Click"
+                    >
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="📄" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Дараа төлбөрт" FontSize="18" FontWeight="Bold"
+                           Foreground="DimGray" HorizontalAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
+
+
+            <Button Grid.Row="0" Grid.Column="1"
+                Style="{StaticResource CardButtonStyle}"
+                    
+                Click="BtnBuyCard_Click">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="⚡" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Урьдчилсан төлбөрт" FontSize="18" FontWeight="Bold"
+                           Foreground="#0D1B2A" HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="0"
+                Style="{StaticResource CardButtonStyle}"
+                 
+                Click="BtnPayment_Click">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="💳" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Hybrid" FontSize="18" FontWeight="Bold"
+                           Foreground="DimGray" HorizontalAlignment="Center"
+                           Margin="0,12,0,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

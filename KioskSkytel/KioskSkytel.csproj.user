@@ -17,16 +17,13 @@
     <Compile Update="KioskApp.UI\Views\GoPlus\GP_Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="KioskApp.UI\Views\GoPlus\GP_Payment.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="KioskApp.UI\Views\NewNumberForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="KioskApp.UI\Views\PaymentNew.xaml.cs">
+    <Compile Update="KioskApp.UI\Views\PhoneInfo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="KioskApp.UI\Views\PhoneInfo.xaml.cs">
+    <Compile Update="KioskApp.UI\Views\SelectNumberType.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="KioskApp.UI\Views\SkyMedia\AddressChange.xaml.cs">

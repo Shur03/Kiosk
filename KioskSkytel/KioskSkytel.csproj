@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="KioskApp.Shared\**" />
+    <Compile Remove="KioskApp.UI\Controls\**" />
+    <EmbeddedResource Remove="KioskApp.Shared\**" />
+    <EmbeddedResource Remove="KioskApp.UI\Controls\**" />
+    <None Remove="KioskApp.Shared\**" />
+    <None Remove="KioskApp.UI\Controls\**" />
+    <Page Remove="KioskApp.Shared\**" />
+    <Page Remove="KioskApp.UI\Controls\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="KioskApp.UI\Assets\images\favicon.ico" />
     <None Remove="KioskApp.UI\Assets\images\lottery.jpg" />
     <None Remove="KioskApp.UI\Assets\images\mongoldoo.png" />
@@ -18,10 +29,7 @@
     <Folder Include="KioskApp.Core\Interfaces\" />
     <Folder Include="KioskApp.Core\Services\" />
     <Folder Include="KioskApp.Services\Api\" />
-    <Folder Include="KioskApp.Services\HardwareMock\" />
     <Folder Include="KioskApp.Services\DTOs\" />
-    <Folder Include="KioskApp.Shared\" />
-    <Folder Include="KioskApp.UI\Controls\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +52,8 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="PCSC" Version="7.0.1" />
+    <PackageReference Include="PCSC.Iso7816" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>

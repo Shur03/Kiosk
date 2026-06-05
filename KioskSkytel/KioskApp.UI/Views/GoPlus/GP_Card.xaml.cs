@@ -1,18 +1,18 @@
 ﻿using System.Windows;
 
-namespace KioskSkytel.KioskApp.Views.GoPlus
+namespace KioskSkytel.KioskApp.UI.Views.GoPlus
 {
-    public partial class GP_Payment : Window
+    public partial class GP_Card : Window
     {
         public string SelectedPaymentMethod { get; private set; } = string.Empty;
 
         // Bindable properties — set these before opening the window
-        public string Username { get; set; } = "96950039";
-        public string SelectedCard { get; set; } = "GoPlus 9900₮";
-        public string Amount { get; set; } = "9,900₮";
-        public string ReceiptType { get; set; } = "Хувь хүн";
+        // public string Username { get; set; } = "96950039";
+        // public string SelectedCard { get; set; } = "GoPlus 9900₮";
+        // public string Amount { get; set; } = "9,900₮";
+        // public string ReceiptType { get; set; } = "Хувь хүн";
 
-        public GP_Payment()
+        public GP_Card()
         {
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace KioskSkytel.KioskApp.Views.GoPlus
             Close();
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
             Close();
