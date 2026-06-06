@@ -6,14 +6,14 @@ namespace KioskSkytel.KioskApp.UI.Views
     /// <summary>
     /// Interaction logic for PhoneInfo.xaml
     /// </summary>
-    public partial class PhoneInfo : Window
+    public partial class AccountInfo : Window
     {
-        private KioskSkytel.KioskApp.UI.ViewModels.PhoneInfoViewModel? _viewModel;
+        private KioskSkytel.KioskApp.UI.ViewModels.AccountInfoViewModel? _viewModel;
 
-        public PhoneInfo(string accountNumber, ServiceType serviceType = ServiceType.SKYTEL)
+        public AccountInfo(string accountNumber, ServiceType serviceType = ServiceType.SKYTEL)
         {
             InitializeComponent();
-            _viewModel = new KioskSkytel.KioskApp.UI.ViewModels.PhoneInfoViewModel(accountNumber, serviceType);
+            _viewModel = new KioskSkytel.KioskApp.UI.ViewModels.AccountInfoViewModel(accountNumber, serviceType);
             DataContext = _viewModel;
             Loaded += async (_, __) => await _viewModel.LoadAsync();
         }
@@ -21,6 +21,11 @@ namespace KioskSkytel.KioskApp.UI.Views
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

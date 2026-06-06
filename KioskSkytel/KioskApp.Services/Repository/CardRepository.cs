@@ -14,7 +14,7 @@ namespace KioskApp.Services
             _databaseService = databaseService;
         }
 
-        public async Task<List<Card>> GetCardsAsync(int cardCategory)
+        public async Task<List<Card>> GetCardsAsync(int cardType)
         {
             var cards = new List<Card>();
 
@@ -26,7 +26,7 @@ namespace KioskApp.Services
 
                 using (var command = new NpgsqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@cardCategory", cardCategory);
+                    command.Parameters.AddWithValue("@cardCategory", cardType);
                     using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
@@ -34,11 +34,11 @@ namespace KioskApp.Services
                             cards.Add(new Card
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("id")),
-                                Price = reader.GetString(reader.GetOrdinal("price")),
+                                Price = reader.GetDouble(reader.GetOrdinal("price")),
                                 Title = reader.GetString(reader.GetOrdinal("title")),
                                 Duration = reader.GetString(reader.GetOrdinal("duration")),
-                                UnitAmount = reader.GetString(reader.GetOrdinal("unit_amount")),
-                                DataGB = reader.GetString(reader.GetOrdinal("data_gb")),
+                                UnitAmount = reader.GetInt32(reader.GetOrdinal("unit_amount")),
+                                DataGB = reader.GetInt32(reader.GetOrdinal("data_gb")),
                                 CardType = reader.GetInt32(reader.GetOrdinal("category")),
                             });
                         }
@@ -69,11 +69,11 @@ namespace KioskApp.Services
                             cards.Add(new Card
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("id")),
-                                Price = reader.GetString(reader.GetOrdinal("price")),
+                                Price = reader.GetDouble(reader.GetOrdinal("price")),
                                 Title = reader.GetString(reader.GetOrdinal("title")),
                                 Duration = reader.GetString(reader.GetOrdinal("duration")),
-                                UnitAmount = reader.GetString(reader.GetOrdinal("unit_amount")),
-                                DataGB = reader.GetString(reader.GetOrdinal("data_gb")),
+                                UnitAmount = reader.GetInt32(reader.GetOrdinal("unit_amount")),
+                                DataGB = reader.GetInt32(reader.GetOrdinal("data_gb")),
                                 CardType = reader.GetInt32(reader.GetOrdinal("category")),
                             });
                         }

@@ -1,44 +1,73 @@
-using KioskApp.Models;
-using KioskApp.Services;
-using KioskApp.Services.Database;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static KioskApp.Models.Card;
+using KioskApp.Services.Database;
+using KioskApp.Services.Repository;
+using KioskApp.Models;
 
 namespace KioskSkytel.KioskApp.UI.ViewModels
 {
-    public class GP_CardViewModel : INotifyPropertyChanged
+    public class AccountInfoViewModel : INotifyPropertyChanged
     {
-        private readonly CardCategory _cardType = CardCategory.GOPLUS;
+        private string _bundleName = string.Empty;
+        private string _fullName = string.Empty;
+        private readonly ServiceType _serviceType = ServiceType.SKYTEL;
 
-        public ObservableCollection<Card> Cards { get; } = new();
+        public string AccountNumber { get; }
+
+        public string BundleName
+        {
+            get => _bundleName;
+            private set
+            {
+                if (_bundleName == value) return;
+                _bundleName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FullName
+        {
+            get => _fullName;
+            private set
+            {
+                if (_fullName == value) return;
+                _fullName = value;
+                OnPropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public GP_CardViewModel(CardCategory cardType = CardCategory.GOPLUS)
+        public AccountInfoViewModel(string accountNumber, ServiceType serviceType = ServiceType.SKYTEL)
         {
-            _cardType = cardType;
+            AccountNumber = accountNumber;
+            _serviceType = serviceType;
         }
 
         public async Task LoadAsync()
         {
             var dbService = CreateDatabaseService();
 
-            var cardRepo = new CardRepository(dbService);
-            var cards = await cardRepo.GetCardsAsync((int)_cardType);
+            // get accounts by account number
+            var accountRepo = new AccountRepository(dbService);
+            var accounts = await accountRepo.GetAccountsAsync(AccountNumber, (int)_serviceType);
 
-            Cards.Clear();
-            if (cards?.Count > 0)
+            if (accounts?.Count > 0)
             {
-                foreach (var card in cards)
-                {
-                    Cards.Add(card);
-                }
+                var account = accounts[0];
+                BundleName = account.BundleName ?? account.AccountNumber ?? string.Empty;
+                FullName = string.IsNullOrWhiteSpace(account.FullName)
+                    ? "Мэдээлэл олдсонгүй"
+                    : account.FullName;
+            }
+            else
+            {
+                BundleName = "Олдсонгүй";
+                FullName = "Мэдээлэл олдсонгүй";
             }
         }
 

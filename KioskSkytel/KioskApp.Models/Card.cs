@@ -10,10 +10,10 @@ namespace KioskApp.Models
 
         public required int Id { get; set; }
         public required string Title { get; set; }
-        public required string Price { get; set; }
+        public required double Price { get; set; }
         public required string Duration { get; set; }
-        public required string UnitAmount { get; set; }
-        public required string DataGB { get; set; }
+        public required int UnitAmount { get; set; }
+        public required int DataGB { get; set; }
         public required int CardType { get; set; }
     }
     public static class CardCategoryExtensions

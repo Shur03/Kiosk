@@ -1,0 +1,392 @@
+﻿<Window x:Class="KioskSkytel.KioskApp.Views.GP_Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InputKeyboard"
+        Width="800"
+        Height="620"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown">
+
+    <Window.Resources>
+        <!-- Base Key Button Style -->
+        <Style x:Key="KeyButtonStyle"
+                TargetType="Button">
+            <Setter Property="Width"
+                    Value="52"/>
+            <Setter Property="Height"
+                    Value="46"/>
+            <Setter Property="Margin"
+                    Value="3"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="FontWeight"
+                    Value="Normal"/>
+            <Setter Property="Foreground"
+                    Value="#2C2C2C"/>
+            <Setter Property="Background"
+                    Value="#F5F5F5"/>
+            <Setter Property="BorderBrush"
+                    Value="#DDDDDD"/>
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                    Value="True">
+                                <Setter Property="Background"
+                                        Value="#E0E0E0"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                    Value="True">
+                                <Setter Property="Background"
+                                        Value="#C8C8C8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Wide Key Style (Backspace) -->
+        <Style x:Key="WideKeyStyle"
+                TargetType="Button"
+                BasedOn="{StaticResource KeyButtonStyle}">
+            <Setter Property="Width"
+                    Value="64"/>
+        </Style>
+
+        <!-- Continue Button Style -->
+        <Style x:Key="ContinueButtonStyle"
+                TargetType="Button">
+            <Setter Property="Height"
+                    Value="46"/>
+            <Setter Property="Padding"
+                    Value="28,0"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+            <Setter Property="Foreground"
+                    Value="White"/>
+            <Setter Property="Background"
+                    Value="#3A6EE8"/>
+            <Setter Property="BorderThickness"
+                    Value="0"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="24"
+                                Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <TextBlock Text="{TemplateBinding Content}"
+                                        VerticalAlignment="Center"/>
+                                <TextBlock Text=" ›"
+                                        FontSize="20"
+                                        VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                    Value="True">
+                                <Setter Property="Background"
+                                        Value="#2A5ED8"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                    Value="True">
+                                <Setter Property="Background"
+                                        Value="#1A4EC8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Close Button Style -->
+        <Style x:Key="CloseButtonStyle"
+                TargetType="Button">
+            <Setter Property="Width"
+                    Value="32"/>
+            <Setter Property="Height"
+                    Value="32"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="Foreground"
+                    Value="#555555"/>
+            <Setter Property="Background"
+                    Value="#EEEEEE"/>
+            <Setter Property="BorderThickness"
+                    Value="0"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="16">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                    Value="True">
+                                <Setter Property="Background"
+                                        Value="#DDDDDD"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Drop shadow container -->
+    <Border Margin="16"
+            Background="White"
+            CornerRadius="16">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="24"
+                    ShadowDepth="4"
+                    Opacity="0.18"
+                    Color="#000000"/>
+        </Border.Effect>
+
+        <Grid>
+            <!-- Close Button -->
+            <Button Style="{StaticResource CloseButtonStyle}"
+                    Content="✕"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,12,12,0"
+                    Click="CloseButton_Click"/>
+
+            <StackPanel Margin="32,28,32,24"
+                    VerticalAlignment="Top">
+
+                <!-- Label -->
+                <TextBlock Text="GO+ үйлчилгээний нэвтрэх нэрээ оруулна уу"
+                           FontSize="15"
+                           Foreground="#444444"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,10"/>
+
+                <!-- Input Field Row -->
+                <Grid Margin="0,0,0,18">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                            BorderBrush="#CCCCCC"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Background="White">
+                        <TextBox x:Name="InputTextBox"
+                                 FontSize="17"
+                                 Padding="10,10"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 Height="46"
+                                 Text=""
+                                 IsReadOnly="True"/>
+                    </Border>
+
+                    <!-- Mic Button -->
+                    <Button Grid.Column="1"
+                            Width="46"
+                            Height="46"
+                            Margin="8,0,0,0"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="MicButton_Click">
+                        <Path Data="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"
+                              Fill="#3A6EE8"
+                              Stretch="Uniform"
+                              Width="22"
+                                Height="22"/>
+                    </Button>
+                </Grid>
+
+                <!-- Number Row -->
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,4">
+                    <Button Content="1"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="2"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="3"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="4"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="5"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="6"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="7"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="8"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="9"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="0"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <!-- Backspace -->
+                    <Button Style="{StaticResource WideKeyStyle}"
+                            Click="Backspace_Click">
+                        <Path Data="M22,3H7C6.31,3 5.77,3.35 5.41,3.88L0,12L5.41,20.12C5.77,20.64 6.31,21 7,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12L19,15.59Z"
+                              Fill="#555555"
+                                Stretch="Uniform"
+                                Width="20"
+                                Height="20"/>
+                    </Button>
+                </StackPanel>
+
+                <!-- Row Q -->
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,4">
+                    <Button Content="Q"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="W"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="E"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="R"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="T"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="Y"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="U"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="I"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="O"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="P"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="@"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                </StackPanel>
+
+                <!-- Row A -->
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,4">
+                    <Button Content="A"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="S"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="D"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="F"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="G"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="H"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="J"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="K"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="L"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                </StackPanel>
+
+                <!-- Row Z -->
+                <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,4">
+                    <Button Content="Z"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="X"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="C"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="V"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="B"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="N"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="M"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="_"
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                    <Button Content="."
+                            Style="{StaticResource KeyButtonStyle}"
+                            Click="Key_Click"/>
+                </StackPanel>
+
+                <!-- Continue Button -->
+                <Button Content="Үргэлжлүүлэх"
+                        Style="{StaticResource ContinueButtonStyle}"
+                        HorizontalAlignment="Center"
+                        Margin="0,18,0,0"
+                        Click="ContinueButton_Click"/>
+
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

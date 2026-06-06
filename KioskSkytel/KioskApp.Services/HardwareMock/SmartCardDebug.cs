@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using System.Text;
+using System.Windows;
 using PCSC;
 using PCSC.Exceptions;
 using PCSC.Iso7816;
@@ -7,9 +10,17 @@ namespace KioskSkytel.KioskApp.Services.HardwareMock
 {
     public class SmartCardDebug
     {
+        private StringBuilder _log = new StringBuilder();
+
+        private void Log(string message)
+        {
+            _log.AppendLine(message);
+        }
+
         public void LogDebugInfo()
         {
-            Console.WriteLine("=== SmartCardDebug start ===");
+            _log.Clear();
+            Log("=== SmartCardDebug start ===");
 
             try
             {
@@ -18,28 +29,40 @@ namespace KioskSkytel.KioskApp.Services.HardwareMock
 
                 if (readers == null || readers.Length == 0)
                 {
-                    Console.WriteLine("No smart card readers found.");
+                    Log("No smart card readers found.");
                     return;
                 }
 
-                Console.WriteLine($"Readers found: {readers.Length}");
-                foreach (var reader in readers)
+                var omnikeyReaders = readers
+                    .Where(r => r.Contains("OMNIKEY", StringComparison.OrdinalIgnoreCase))
+                    .ToArray();
+
+                if (omnikeyReaders.Length == 0)
                 {
-                    Console.WriteLine($"Reader: {reader}");
+                    Log("No OMNIKEY reader found.");
+                    Log($"Total readers on system: {readers.Length}");
+                    return;
+                }
+
+                Log($"OMNIKEY readers: {omnikeyReaders.Length}");
+                foreach (var reader in omnikeyReaders)
+                {
+                    Log($"Reader: {reader}");
                     DebugReader(context, reader);
                 }
             }
             catch (PCSCException ex)
             {
-                Console.WriteLine($"PC/SC error: {ex.Message} (0x{ex.SCardError:X})");
+                Log($"PC/SC error: {ex.Message} (0x{ex.SCardError:X})");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Unexpected error: " + ex);
+                Log("Unexpected error: " + ex);
             }
             finally
             {
-                Console.WriteLine("=== SmartCardDebug end ===");
+                Log("=== SmartCardDebug end ===");
+                MessageBox.Show(_log.ToString(), "SmartCard Debug", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -51,21 +74,21 @@ namespace KioskSkytel.KioskApp.Services.HardwareMock
                 var rc = reader.Connect(readerName, SCardShareMode.Shared, SCardProtocol.Any);
                 if (rc != SCardError.Success)
                 {
-                    Console.WriteLine($"  Connect failed: {rc}");
+                    Log($"  Connect failed: {rc}");
                     return;
                 }
 
                 rc = reader.GetAttrib(SCardAttribute.AtrString, out byte[] atr);
                 if (rc == SCardError.Success && atr?.Length > 0)
-                    Console.WriteLine("  ATR: " + BitConverter.ToString(atr));
+                    Log("  ATR: " + BitConverter.ToString(atr));
                 else
-                    Console.WriteLine("  ATR: <unavailable>");
+                    Log("  ATR: <unavailable>");
 
                 TryLogUid(reader);
             }
             catch (PCSCException ex)
             {
-                Console.WriteLine($"  Reader error: {ex.Message} (0x{ex.SCardError:X})");
+                Log($"  Reader error: {ex.Message} (0x{ex.SCardError:X})");
             }
         }
 
@@ -78,35 +101,13 @@ namespace KioskSkytel.KioskApp.Services.HardwareMock
 
                 var rc = reader.Transmit(sendBuffer, ref recvBuffer);
                 if (rc == SCardError.Success)
-                    Console.WriteLine("  UID: " + BitConverter.ToString(recvBuffer));
+                    Log("  UID: " + BitConverter.ToString(recvBuffer));
                 else
-                    Console.WriteLine($"  UID read failed: {rc}");
+                    Log($"  UID read failed: {rc}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("  UID read failed: " + ex.Message);
-            }
-        }
-        private void TryLogUid(IsoReader isoReader)
-        {
-            try
-            {
-                var getUid = new CommandApdu(IsoCase.Case2Short, isoReader.ActiveProtocol)
-                {
-                    CLA = 0xFF,
-                    INS = 0xCA,
-                    P1 = 0x00,
-                    P2 = 0x00,
-                    Le = 0x00
-                };
-
-                var response = isoReader.Transmit(getUid);
-                Console.WriteLine($"  UID SW1SW2: {response.SW1:X2}{response.SW2:X2}");
-                Console.WriteLine("  UID Data: " + BitConverter.ToString(response.GetData()));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("  UID read failed: " + ex.Message);
+                Log("  UID read failed: " + ex.Message);
             }
         }
     }

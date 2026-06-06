@@ -1,11 +1,16 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using KioskApp.Models;
 using KioskSkytel.KioskApp.UI.ViewModels;
 
 namespace KioskSkytel.KioskApp.UI.Views
 {
+    public enum AccountInputAction
+    {
+        Payment,
+        BuyCard
+    }
+
     /// <summary>
     /// Interaction logic for AccountInputForm.xaml
     /// </summary>
@@ -15,10 +20,12 @@ namespace KioskSkytel.KioskApp.UI.Views
         public string? AccountNumber { get; private set; }
         private AccountInputViewModel? _viewModel;
         private readonly ServiceType _serviceType = ServiceType.SKYTEL;
+        private readonly AccountInputAction _action = AccountInputAction.Payment;
 
-        public AccountInputForm(ServiceType serviceType = ServiceType.SKYTEL)
+        public AccountInputForm(ServiceType serviceType = ServiceType.SKYTEL, AccountInputAction action = AccountInputAction.Payment)
         {
             _serviceType = serviceType;
+            _action = action;
             InitializeComponent();
 
             _viewModel = new AccountInputViewModel(_serviceType);
@@ -32,13 +39,26 @@ namespace KioskSkytel.KioskApp.UI.Views
             _viewModel.PhoneInfoRequested += (accountNumber, serviceType) =>
             {
                 AccountNumber = accountNumber;
-                var window = new PhoneInfo(accountNumber, serviceType)
+                if (_action == AccountInputAction.BuyCard)
+                {
+                    var window = new BuyCard(Card.CardCategory.SKYTEL, accountNumber)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
+                    Hide();
+                    window.ShowDialog();
+                    Close();
+                    return;
+                }
+
+                var accountInfoWindow = new AccountInfo(accountNumber, serviceType)
                 {
                     Owner = this,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
                 };
                 Hide();
-                window.ShowDialog();
+                accountInfoWindow.ShowDialog();
                 Close();
             };
 

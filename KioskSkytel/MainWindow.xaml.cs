@@ -101,6 +101,11 @@ namespace KioskSkytel
             MainContent.Content = new SelectNumberType();
         }
 
+        public void ShowSelectSimType()
+        {
+            MainContent.Content = new SelectSimType();
+        }
+
         // =========================
         // PLACEHOLDER VIEW
         // =========================

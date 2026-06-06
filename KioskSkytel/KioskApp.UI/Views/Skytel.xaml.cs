@@ -1,15 +1,17 @@
-﻿using System;
+﻿using KioskApp.Models;
+using KioskSkytel;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using KioskApp.Models;
-using KioskSkytel;
+using static KioskApp.Models.Card;
 
 namespace KioskSkytel.KioskApp.UI.Views
 {
     public partial class Skytel : UserControl
     {
-        private Border _overlayBorder;
+        private Border? _overlayBorder;
+        private readonly CardCategory _cardType = CardCategory.SKYTEL;
 
         public Skytel()
         {
@@ -38,7 +40,7 @@ namespace KioskSkytel.KioskApp.UI.Views
         {
             if (Window.GetWindow(this) is MainWindow mainWindow)
             {
-                mainWindow.ShowSelectNumberType();
+                mainWindow.ShowSelectSimType();
             }
         }
 
@@ -60,7 +62,7 @@ namespace KioskSkytel.KioskApp.UI.Views
 
         private void BtnBuyCard_Click(object sender, RoutedEventArgs e)
         {
-            var window = new BuyCard();
+            var window = new AccountInputForm(ServiceType.SKYTEL, AccountInputAction.BuyCard);
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
         }

@@ -4,50 +4,73 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="BuyCard"
-        Height="600"
-        Width="1000"
+        Title=""
+        Height="520"
+        Width="860"
         WindowStyle="None"
-        AllowsTransparency="True"
-        Background="#F4F6F8"
-        WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
+        AllowsTransparency="True">
 
     <Window.Resources>
-        <!-- Card style -->
-        <Style x:Key="CardCard"
-               TargetType="Border">
-            <Setter Property="Background"
-                    Value="White"/>
-            <Setter Property="CornerRadius"
-                    Value="16"/> 
-            <Setter Property="Padding"
-                    Value="20,0,20,18"/>
-            <Setter Property="Margin"
-                    Value="8"/>
-            <Setter Property="Effect">
+
+        <!-- Close circle button -->
+        <Style x:Key="CloseButtonStyle"
+               TargetType="Button">
+            <Setter Property="Width"
+                    Value="44"/>
+            <Setter Property="Height"
+                    Value="44"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Template">
                 <Setter.Value>
-                    <DropShadowEffect Color="#000000"
-                                      Opacity="0.07"
-                                      BlurRadius="18"
-                                      ShadowDepth="2"
-                                      Direction="270"/>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="White"
+                                CornerRadius="22"
+                                BorderBrush="#1565C0"
+                                BorderThickness="2">
+                            <TextBlock Text="✕"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1565C0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="#EFF6FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="#DBEAFE"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- "Авах" button style -->
-        <Style x:Key="BuyButton"
+        <!-- СОНГОХ button (inside card) -->
+        <Style x:Key="SelectButtonStyle"
                TargetType="Button">
             <Setter Property="Height"
-                    Value="44"/>
+                    Value="38"/>
             <Setter Property="FontSize"
-                    Value="15"/>
+                    Value="14"/>
             <Setter Property="FontWeight"
-                    Value="SemiBold"/>
+                    Value="Bold"/>
             <Setter Property="Foreground"
-                    Value="#111111"/>
-            <Setter Property="Background"
                     Value="White"/>
+            <Setter Property="Background"
+                    Value="#1565C0"/>
             <Setter Property="Cursor"
                     Value="Hand"/>
             <Setter Property="Template">
@@ -55,9 +78,7 @@
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="Bd"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="#CCCCCC"
-                                BorderThickness="1.5"
-                                CornerRadius="22">
+                                CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -66,104 +87,250 @@
                                      Value="True">
                                 <Setter TargetName="Bd"
                                         Property="Background"
-                                        Value="#F0FDFB"/>
-                                <Setter TargetName="Bd"
-                                        Property="BorderBrush"
-                                        Value="#00BFA5"/>
+                                        Value="#1976D2"/>
                             </Trigger>
                             <Trigger Property="IsPressed"
                                      Value="True">
                                 <Setter TargetName="Bd"
                                         Property="Background"
-                                        Value="#E0F7F4"/>
+                                        Value="#0D47A1"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled"
+                                     Value="False">
+                                <Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="#93C5FD"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Continue pill button -->
+        <Style x:Key="ContinueButtonStyle"
+               TargetType="Button">
+            <Setter Property="Height"
+                    Value="52"/>
+            <Setter Property="MinWidth"
+                    Value="220"/>
+            <Setter Property="FontSize"
+                    Value="18"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+            <Setter Property="Foreground"
+                    Value="White"/>
+            <Setter Property="Background"
+                    Value="#1565C0"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="26">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="#1976D2"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="#0D47A1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Card item DataTemplate -->
+        <DataTemplate x:Key="CardItemTemplate">
+            <Border x:Name="CardBorder"
+                    Background="White"
+                    CornerRadius="16"
+                    BorderBrush="#CBD5E1"
+                    BorderThickness="2"
+                    Margin="8"
+                    Padding="20,18"
+                    Width="180"
+                    Cursor="Hand">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="12"
+                                      ShadowDepth="2"
+                                      Opacity="0.08"
+                                      Color="#000000"/>
+                </Border.Effect>
+                <StackPanel>
+                    <!-- Card name -->
+                    <TextBlock Text="{Binding Name}"
+                               FontSize="15"
+                               FontWeight="Bold"
+                               Foreground="#0D1B2A"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,8"/>
+
+                    <!-- Хоног -->
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,4">
+                        <TextBlock Text="{Binding Days}"
+                                   FontSize="14"
+                                   Foreground="#475569"/>
+                        <TextBlock Text=" хоног"
+                                   FontSize="14"
+                                   Foreground="#475569"/>
+                    </StackPanel>
+
+                    <!-- Нэгж -->
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,12">
+                        <TextBlock Text="{Binding Units}"
+                                   FontSize="14"
+                                   Foreground="#475569"/>
+                        <TextBlock Text=" нэгж"
+                                   FontSize="14"
+                                   Foreground="#475569"/>
+                    </StackPanel>
+
+                    <!-- Price -->
+                    <TextBlock Text="{Binding PriceFormatted}"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="#1565C0"
+                               Margin="0,0,0,14"/>
+
+                    <!-- СОНГОХ button -->
+                    <Button Content="СОНГОХ"
+                            Style="{StaticResource SelectButtonStyle}"
+                            Command="{Binding DataContext.SelectCardCommand,
+                                      RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding}"/>
+                </StackPanel>
+
+                <!-- Selected highlight trigger -->
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}"
+                                         Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="#1565C0"/>
+                                <Setter Property="BorderThickness"
+                                        Value="2.5"/>
+                                <Setter Property="Background"
+                                        Value="#F0F7FF"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+        </DataTemplate>
+
     </Window.Resources>
 
-    <Grid>
-        <!-- Header -->
-        <DockPanel LastChildFill="True"
-                   VerticalAlignment="Top"
-                   Height="64"
-                   Background="White">
-            <DockPanel.Effect>
-                <DropShadowEffect Color="#000000"
-                                  Opacity="0.06"
-                                  BlurRadius="10"
-                                  ShadowDepth="2"
-                                  Direction="270"/>
-            </DockPanel.Effect>
-            <TextBlock Text="Нэгж сонгох"
-                       FontSize="22"
-                       FontWeight="Bold"
-                       Foreground="#111111"
-                       VerticalAlignment="Center"
-                       Margin="32,0,0,0"
-                       DockPanel.Dock="Left"/>
-            <Button Content="✕"
-                    HorizontalAlignment="Right"
-                    DockPanel.Dock="Right"
-                    Margin="0,0,24,0"
-                    Width="36"
-                    Height="36"
-                    FontSize="16"
-                    Foreground="#888888"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    Command="{Binding CloseCommand}"/>
-        </DockPanel>
+    <!-- Outer shadow card -->
+    <Border Background="White"
+            CornerRadius="24"
+            Margin="16">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="40"
+                              ShadowDepth="8"
+                              Opacity="0.15"
+                              Color="#000000"/>
+        </Border.Effect>
 
-        <!-- Scrollable card grid -->
-        <ScrollViewer Margin="0,20,0,0"
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled"
-                      Background="Transparent"
-                      Padding="0,20,0,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Header -->
+                <RowDefinition Height="*"/>
+                <!-- Cards area -->
+                <RowDefinition Height="Auto"/>
+                <!-- Footer -->
+            </Grid.RowDefinitions>
 
-            <ItemsControl ItemsSource="{Binding Cards}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="5"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Style="{StaticResource CardCard}"
-                                Height="200">
-                            <StackPanel>
-                                <TextBlock Text="{Binding Price, StringFormat={}{0} ₮}"
-                                           FontSize="26"
-                                           FontWeight="Bold"
-                                           Foreground="DimGray"/>
-                                <TextBlock Text="{Binding DataGB,StringFormat={}{0} GB дата}"
-                                           FontSize="13"
-                                           Foreground="DimGray"
-                                           Margin="0,2,0,0"/>
-                                <Separator Background="#EEEEEE"
-                                           Margin="0,14,0,0"
-                                           Height="1"/>
-                                <TextBlock Text="{Binding UnitAmount}"
-                                           FontSize="15"
-                                           FontWeight="SemiBold"
-                                           Foreground="#111111"/>
-                                <TextBlock Text="{Binding Duration}"
-                                           FontSize="13"
-                                           Foreground="#888888"
-                                           Margin="0,3,0,0"/>
-                                <Button Content="Сонгох"
-                                        Style="{StaticResource BuyButton}"
-                                        Command="{Binding BuyCommand}"
-                                        CommandParameter="{Binding}"/>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-    </Grid>
+            <!-- ── HEADER ── -->
+            <Grid Grid.Row="0"
+                  Margin="28,22,20,0">
+                <TextBlock Text="Картын сонголт"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="#0D1B2A"
+                           VerticalAlignment="Center"/>
+                <Button Style="{StaticResource CloseButtonStyle}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="CancelBtn_Click"/>
+            </Grid>
+
+            <!-- Divider -->
+            <Rectangle Grid.Row="0"
+                       Height="1"
+                       Fill="#E2E8F0"
+                       VerticalAlignment="Bottom"
+                       Margin="0,58,0,0"/>
+
+            <!-- ── CARDS AREA ── -->
+            <ScrollViewer Grid.Row="1"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Disabled"
+                          Margin="20,16,20,0">
+                <ItemsControl ItemsSource="{Binding Cards}"
+                              ItemTemplate="{StaticResource CardItemTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"
+                                       HorizontalAlignment="Left"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- ── FOOTER ── -->
+            <Border Grid.Row="2"
+                    BorderBrush="#E2E8F0"
+                    BorderThickness="0,1,0,0"
+                    Padding="28,16,28,20">
+                <Grid>
+                    <!-- Selected card summary (left) -->
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left">
+                        <TextBlock Text="Сонгосон: "
+                                   FontSize="15"
+                                   Foreground="#64748B"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding SelectedCard.Name, FallbackValue='—'}"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Foreground="#0D1B2A"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Continue button (right) -->
+                    <Button Style="{StaticResource ContinueButtonStyle}"
+                            HorizontalAlignment="Right"
+                            Click="BuyCardClick"
+                            Padding="28,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Үргэлжлүүлэх  ›"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
 </Window>

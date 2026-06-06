@@ -1,0 +1,348 @@
+﻿<Window x:Class="KioskSkytel.KioskApp.UI.Views.CardScan"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="CardScan"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Width="800" Height="650"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Colors -->
+        <Color x:Key="SkyBlueColor">#1565C0</Color>
+        <Color x:Key="SkyLightBlueColor">#42A5F5</Color>
+        <Color x:Key="BackgroundColor">#E8F0F7</Color>
+        <Color x:Key="CardBgColor">#F0F4F8</Color>
+        <Color x:Key="AccentOrangeColor">#E65100</Color>
+
+        <SolidColorBrush x:Key="SkyBlueBrush" Color="{StaticResource SkyBlueColor}"/>
+        <SolidColorBrush x:Key="SkyLightBlueBrush" Color="{StaticResource SkyLightBlueColor}"/>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+        <SolidColorBrush x:Key="AccentOrangeBrush" Color="{StaticResource AccentOrangeColor}"/>
+    </Window.Resources>
+
+    <!-- Root with rounded corners -->
+    <Border CornerRadius="24"
+            Background="{StaticResource BackgroundBrush}"
+            ClipToBounds="True">
+
+        <Grid>
+            <!-- Watermark SIM card icons top -->
+            <Grid VerticalAlignment="Top" Height="220" Margin="0,0,0,0" Opacity="0.12">
+               <!-- <Image Source="/Assets/sim_watermark.png" Stretch="UniformToFill"/>-->
+            </Grid>
+
+            <!-- Close Button -->
+            <Button Width="64" Height="64"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,32,32,0"
+                    Background="White"
+                    BorderBrush="{StaticResource SkyLightBlueBrush}"
+                    BorderThickness="2"
+                    Click="CloseBtn_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White"
+                                BorderBrush="{StaticResource SkyLightBlueBrush}"
+                                BorderThickness="2"
+                                CornerRadius="32">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <materialDesign:PackIcon Kind="Close"
+                                         Width="28" Height="28"
+                                         Foreground="{StaticResource SkyBlueBrush}"/>
+            </Button>
+
+            <!-- Main Content -->
+            <Grid Margin="60,160,60,80">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Logo row -->
+                    <RowDefinition Height="*"/>
+                    <!-- Center content -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Instruction text -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Step indicator -->
+                </Grid.RowDefinitions>
+
+                <!-- ===== CENTER CONTENT: Card Reader + ID Card ===== -->
+                <Grid Grid.Row="1" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT: Kiosk Card Reader Device -->
+                    <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border Width="260" Height="480"
+                                CornerRadius="18"
+                                Background="#0D47A1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- SKYtel header -->
+                                    <RowDefinition Height="*"/>
+                                    <!-- Black reader body -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- КИОСК footer -->
+                                </Grid.RowDefinitions>
+
+                                <!-- SKYtel header band -->
+                                <Border Grid.Row="0" Background="#1565C0"
+                                        CornerRadius="18,18,0,0"
+                                        Padding="16,14">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="SKY"
+                                                   FontSize="28"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Bottom"/>
+                                        <TextBlock Text="tel"
+                                                   FontSize="18"
+                                                   FontStyle="Italic"
+                                                   Foreground="White"
+                                                   VerticalAlignment="Bottom"
+                                                   Margin="0,0,0,2"/>
+                                        <!-- Skytel logo arrow icon placeholder -->
+                                        <Path Margin="6,0,0,4"
+                                              Fill="#FF6F00"
+                                              VerticalAlignment="Bottom"
+                                              Data="M0,12 L8,0 L16,12 Z"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Card Reader Body -->
+                                <Border Grid.Row="1" Background="#212121" Margin="0">
+                                    <Grid Margin="20">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Screen/Scanner area -->
+                                        <Border Grid.Row="0"
+                                                Background="#111111"
+                                                CornerRadius="6"
+                                                Margin="0,16,0,16">
+                                            <Border Background="#1A1A1A"
+                                                    Margin="8"
+                                                    CornerRadius="4"/>
+                                        </Border>
+
+                                        <!-- Slot -->
+                                        <Border Grid.Row="1"
+                                                Background="#333333"
+                                                Height="8"
+                                                CornerRadius="4"
+                                                Margin="30,0,30,16"/>
+
+                                        <!-- Two small buttons -->
+                                        <StackPanel Grid.Row="2"
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="0,0,0,16">
+                                            <Ellipse Width="12" Height="12" Fill="#424242" Margin="8,0"/>
+                                            <Ellipse Width="12" Height="12" Fill="#424242" Margin="8,0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- USB / Card Insert Slot -->
+                                <Border Grid.Row="1" VerticalAlignment="Bottom"
+                                        Background="#1A237E"
+                                        Height="32"
+                                        Margin="0">
+                                    <Border Background="#283593"
+                                            Height="10"
+                                            Width="80"
+                                            CornerRadius="3"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"/>
+                                </Border>
+
+                                <!-- КИОСК footer -->
+                                <Border Grid.Row="2"
+                                        Background="#0D47A1"
+                                        CornerRadius="0,0,18,18"
+                                        Padding="16,12">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="·КИОСК"
+                                                   FontSize="22"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"
+                                                   HorizontalAlignment="Center"
+                                                   />
+                                        <TextBlock Text="ТАНЫ ЦАХИМ ҮЙЛЧИЛГЭЭ"
+                                                   FontSize="9"
+                                                   Foreground="#90CAF9"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0,2,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- RIGHT: Mongolian Citizen ID Card -->
+                    <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border Width="320" Height="210"
+                                CornerRadius="12"
+                                Background="#E8D5A3">
+                            <!-- Drop shadow effect -->
+                            <Border.Effect>
+                                <DropShadowEffect Color="#80000000"
+                                                  BlurRadius="20"
+                                                  ShadowDepth="6"
+                                                  Direction="270"
+                                                  Opacity="0.35"/>
+                            </Border.Effect>
+
+                            <Grid Margin="14">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- ID Card Header text -->
+                                <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,8">
+                                    <TextBlock Text="МОНГОЛ УЛСЫН ИРГЭНИЙ ҮНЭМЛЭХ"
+                                               FontSize="8"
+                                               FontWeight="Bold"
+                                               Foreground="#8B4513"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="CITIZEN IDENTITY CARD OF MONGOLIA"
+                                               FontSize="7"
+                                               Foreground="#A0522D"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+
+                                <!-- Photo placeholder -->
+                                <Border Grid.Row="1" Grid.Column="0"
+                                        Width="64" Height="80"
+                                        Background="#C4956A"
+                                        CornerRadius="4"
+                                        VerticalAlignment="Top">
+                                    <!-- Silhouette person icon -->
+                                    <materialDesign:PackIcon Kind="AccountCircle"
+                                                             Width="50" Height="50"
+                                                             Foreground="#8B6347"
+                                                             HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"/>
+                                </Border>
+
+                                <!-- Text lines -->
+                                <StackPanel Grid.Row="1" Grid.Column="1"
+                                            Margin="10,0"
+                                            VerticalAlignment="Top">
+                                    <Rectangle Height="6" Fill="#A0522D" Opacity="0.4" Margin="0,4" RadiusX="2" RadiusY="2"/>
+                                    <Rectangle Height="6" Fill="#A0522D" Opacity="0.3" Margin="0,4" Width="70" HorizontalAlignment="Left" RadiusX="2" RadiusY="2"/>
+                                    <Rectangle Height="6" Fill="#A0522D" Opacity="0.3" Margin="0,4" RadiusX="2" RadiusY="2"/>
+                                    <Rectangle Height="6" Fill="#A0522D" Opacity="0.3" Margin="0,4" Width="80" HorizontalAlignment="Left" RadiusX="2" RadiusY="2"/>
+                                    <Rectangle Height="6" Fill="#A0522D" Opacity="0.3" Margin="0,4" RadiusX="2" RadiusY="2"/>
+                                </StackPanel>
+
+                                <!-- QR / Barcode area -->
+                                <Border Grid.Row="1" Grid.Column="2"
+                                        Width="50" Height="70"
+                                        Background="#D2B48C"
+                                        CornerRadius="4"
+                                        VerticalAlignment="Top">
+                                    <materialDesign:PackIcon Kind="Qrcode"
+                                                             Width="36" Height="36"
+                                                             Foreground="#5D4037"
+                                                             HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"/>
+                                </Border>
+
+                                <!-- Mongolia flag strip at bottom right -->
+                                <Border Grid.Row="1" Grid.Column="2"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Right"
+                                        Width="16" Height="24"
+                                        CornerRadius="2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Grid.Column="0" Fill="#C0392B"/>
+                                        <Rectangle Grid.Column="1" Fill="#2980B9"/>
+                                        <Rectangle Grid.Column="2" Fill="#C0392B"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+                <!-- ===== INSTRUCTION TEXT BOX ===== -->
+                <Border Grid.Row="2"
+                        BorderBrush="{StaticResource SkyLightBlueBrush}"
+                        BorderThickness="2"
+                        CornerRadius="16"
+                        Padding="30,20"
+                        Margin="40,40,40,20"
+                        Background="Transparent">
+                    <TextBlock TextAlignment="Center"
+                               FontSize="26"
+                               Foreground="{StaticResource SkyBlueBrush}"
+                               TextWrapping="Wrap"
+                               LineHeight="38">
+                        <Run Text="Та иргэний үнэмлэхний чипийг дээш"/>
+                        <LineBreak/>
+                        <Run Text="харуулан гүйцэд тулхэнэ үү"/>
+                    </TextBlock>
+                </Border>
+
+                <!-- ===== STEP INDICATOR ===== -->
+                <StackPanel Grid.Row="3"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,0">
+                    <!-- Circle with number 1 -->
+                    <Border Width="48" Height="48"
+                            CornerRadius="24"
+                            BorderBrush="{StaticResource AccentOrangeBrush}"
+                            BorderThickness="2"
+                            Background="Transparent"
+                            VerticalAlignment="Center">
+                        <TextBlock Text="1"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource AccentOrangeBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+
+                    <TextBlock Margin="16,0,0,0"
+                               VerticalAlignment="Center"
+                               TextAlignment="Left"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource SkyBlueBrush}"
+                               TextWrapping="Wrap">
+                        <Run Text="ДУГААРТ ЦАХИМ ҮНЭМЛЭХЭЭ"/>
+                        <LineBreak/>
+                        <Run Text="ХИЙНЭ ҮҮ."/>
+                    </TextBlock>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

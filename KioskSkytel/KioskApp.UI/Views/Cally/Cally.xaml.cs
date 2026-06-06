@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KioskApp.Models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace KioskSkytel.KioskApp.UI.Views.Cally
 {
@@ -39,18 +28,9 @@ namespace KioskSkytel.KioskApp.UI.Views.Cally
 
         private void BtnPayment_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Payment();
+            var window = new AccountInputForm(ServiceType.CALLY);
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
-
-            //if (window.ShowDialog() == true)
-            //{
-            //    MessageBox.Show(
-            //        $"Дугаар: {window.PhoneNumber}\nТөлбөр амжилттай хийгдлээ.",
-            //        "Амжилттай",
-            //        MessageBoxButton.OK,
-            //        MessageBoxImage.Information);
-            //}
         }
-}
+    }
 }

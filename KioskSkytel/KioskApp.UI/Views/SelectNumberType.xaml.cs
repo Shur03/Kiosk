@@ -1,7 +1,4 @@
-﻿using KioskApp.Models;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -16,7 +13,7 @@ namespace KioskSkytel.KioskApp.UI.Views
         public SelectNumberType()
         {
             InitializeComponent();
-            this.Loaded += Skytel_Loaded;
+            Loaded += Skytel_Loaded;
         }
 
         private void Skytel_Loaded(object sender, RoutedEventArgs e)
@@ -29,47 +26,30 @@ namespace KioskSkytel.KioskApp.UI.Views
                 VerticalAlignment = VerticalAlignment.Stretch
             };
 
-            if (this.Parent is Panel parent)
+            if (Parent is Panel parent)
             {
                 parent.Children.Add(_overlayBorder);
                 Panel.SetZIndex(_overlayBorder, 999);
             }
         }
 
-        //private void BtnNewNumber_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var window = new SelectNumberType();
-        //    window.Owner = Window.GetWindow(this);
-        //    window.ShowDialog();
-
-        //}
-
-        private void BtnPayment_Click(object sender, RoutedEventArgs e)
+        private void BtnSelectType_Click(object sender, RoutedEventArgs e)
         {
-            var window = new AccountInputForm(ServiceType.SKYTEL);
-            window.Owner = Window.GetWindow(this);
-            window.ShowDialog();
+            var numberType = (sender as Button)?.Tag as string ?? "hybrid";
+            var owner = Window.GetWindow(this);
+            var grid = new NumberGrid(numberType)
+            {
+                Owner = owner,
+            };
 
-            //if (window.ShowDialog() == true)
-            //{
-            //    MessageBox.Show(
-            //        $"Дугаар: {window.PhoneNumber}\nТөлбөр амжилттай хийгдлээ.",
-            //        "Амжилттай",
-            //        MessageBoxButton.OK,
-            //        MessageBoxImage.Information);
-            //}
-        }
-
-        private void BtnBuyCard_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new BuyCard();
-            window.Owner = Window.GetWindow(this);
-            window.ShowDialog();
-        }
-
-        private void BtnSimRecovery_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO
+            if (grid.ShowDialog() == true && !string.IsNullOrWhiteSpace(grid.SelectedNumber))
+            {
+                var scanWindow = new CardScan(grid.SelectedNumber)
+                {
+                    Owner = owner,
+                };
+                scanWindow.ShowDialog();
+            }
         }
 
         private void CloseOverlay()
