@@ -52,7 +52,7 @@ namespace KioskApp.Services.Repository
             using (var connection = await _databaseService.GetOpenConnectionAsync())
             {
                 var query = "SELECT t1.id, t1.user_id, t1.service_type, t1.account_number, t1.is_active, t1.created_at, " +
-                    "CONCAT(LEFT(u.first_name, 1),'***',RIGHT(u.first_name, 1)) AS full_name, t3.title AS bundle_name " +
+                    "CONCAT(LEFT(u.first_name, 1),'***',RIGHT(u.first_name, 1), ' ',LEFT(u.last_name, 1),'***',RIGHT(u.last_name, 1) ) AS full_name, t3.title AS bundle_name " +
                     "FROM accounts AS t1 " +
                     "LEFT JOIN public.users AS u ON t1.user_id = u.id " +
                     "LEFT JOIN public.account_bundles AS t2 ON t2.account_id = t1.id " +

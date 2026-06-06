@@ -35,6 +35,9 @@
     <Compile Update="KioskApp.UI\Views\SkyMedia\AddressChange.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="KioskApp.UI\Views\SkyMedia\OrderWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="KioskApp.UI\Views\SkyMedia\SkyMedia.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

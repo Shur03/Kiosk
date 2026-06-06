@@ -305,7 +305,7 @@
                                LineHeight="38">
                         <Run Text="Та иргэний үнэмлэхний чипийг дээш"/>
                         <LineBreak/>
-                        <Run Text="харуулан гүйцэд тулхэнэ үү"/>
+                        <Run Text="харуулан гүйцэд түлхэнэ үү"/>
                     </TextBlock>
                 </Border>
 

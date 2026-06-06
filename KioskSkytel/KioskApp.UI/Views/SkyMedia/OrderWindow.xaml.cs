@@ -1,16 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using KioskSkytel.KioskApp.Views.SkyMedia;
+using KioskSkytel.KioskApp.Views.OrderWindow;
 
-namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
+namespace KioskSkytel.KioskApp.UI.Views.OrderWindow
 {
     /// <summary>
-    /// Interaction logic for SkyMedia.xaml
+    /// Interaction logic for OrderWindow.xaml
     /// </summary>
-    public partial class SkyMedia : UserControl
+    public partial class OrderWindow : UserControl
     {
         private Border? _overlayBorder;
-        public SkyMedia()
+        public OrderWindow()
         {
             InitializeComponent();
         }
