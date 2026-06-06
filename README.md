@@ -70,6 +70,8 @@ KioskSkytel
 
 Системийн үндсэн entity-үүд:
 
+<img width="2001" height="1579" alt="erd" src="https://github.com/user-attachments/assets/0cde968c-7dc7-4eef-b33b-5a69d17c1dec" />
+
 ### Users
 
 Хэрэглэгчийн мэдээлэл хадгална.
