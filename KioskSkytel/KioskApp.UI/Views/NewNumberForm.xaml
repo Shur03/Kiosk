@@ -173,11 +173,7 @@
                         <ComboBox x:Name="PhoneNumberCombo"
                                   SelectionChanged="PhoneNumberCombo_SelectionChanged">
 
-                            <ComboBoxItem Content="8811 0001" IsSelected="True"/>
-                            <ComboBoxItem Content="8811 0002"/>
-                            <ComboBoxItem Content="8811 0003"/>
-                            <ComboBoxItem Content="8811 0005"/>
-                            <ComboBoxItem Content="8811 0008"/>
+                            <ComboBoxItem Content="91919191" IsSelected="True"/>
 
                         </ComboBox>
 

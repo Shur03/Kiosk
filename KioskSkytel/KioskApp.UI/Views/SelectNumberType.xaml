@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              Background="#F0F4F8">
@@ -67,7 +68,12 @@
                 Tag="postpaid"
                 Click="BtnSelectType_Click">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="📄" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="Sim"
+      Width="48"
+      Height="48"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center"                   
+      Foreground="#1A73E8"/>
                     <TextBlock Text="Дараа төлбөрт" FontSize="18" FontWeight="Bold"
                            Foreground="DimGray" HorizontalAlignment="Center"
                            Margin="0,12,0,0"/>
@@ -80,9 +86,14 @@
                 Tag="prepaid"
                 Click="BtnSelectType_Click">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="⚡" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="Sim"
+                          Width="48"
+                          Height="48"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"                   
+                          Foreground="#1A73E8"/>        
                     <TextBlock Text="Урьдчилсан төлбөрт" FontSize="18" FontWeight="Bold"
-                           Foreground="#0D1B2A" HorizontalAlignment="Center"
+                           Foreground="DimGray" HorizontalAlignment="Center"
                            TextWrapping="Wrap"
                            TextAlignment="Center"
                            Margin="0,12,0,0"/>
@@ -94,7 +105,12 @@
                 Tag="hybrid"
                 Click="BtnSelectType_Click">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="💳" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="Sim"
+                              Width="48"
+                              Height="48"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"                   
+                              Foreground="#1A73E8"/>    
                     <TextBlock Text="Hybrid" FontSize="18" FontWeight="Bold"
                            Foreground="DimGray" HorizontalAlignment="Center"
                            Margin="0,12,0,0"/>

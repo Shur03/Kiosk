@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title=""
-        Height="700"
+        Height="680"
         Width="860"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -15,7 +15,6 @@
 
     <Window.Resources>
 
-        <!-- Tab button base (active/inactive via DataTrigger on each tab) -->
         <Style x:Key="TabButtonStyle" TargetType="Button">
             <Setter Property="Height" Value="52"/>
             <Setter Property="MinWidth" Value="160"/>
@@ -44,7 +43,38 @@
             </Setter>
         </Style>
 
-        <!-- Number cell button -->
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="White"
+                                CornerRadius="22"
+                                BorderBrush="#1565C0"
+                                BorderThickness="2">
+                            <TextBlock Text="✕"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1565C0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#EFF6FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#DBEAFE"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="NumberCellStyle" TargetType="Button">
             <Setter Property="Height" Value="56"/>
             <Setter Property="FontSize" Value="16"/>
@@ -85,7 +115,6 @@
             </Setter>
         </Style>
 
-        <!-- Number cell DataTemplate -->
         <DataTemplate x:Key="NumberCellTemplate">
             <Button Content="{Binding Number}"
                     Style="{StaticResource NumberCellStyle}"
@@ -96,112 +125,107 @@
 
     </Window.Resources>
 
-    <Border Background="#F8FAFC"
-            CornerRadius="20"
-            Margin="12">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="32" ShadowDepth="4" Opacity="0.12" Color="#000000"/>
-        </Border.Effect>
+    <!-- Outer Grid: card + floating close button -->
+    <Grid>
+        <!-- Card pushed down to leave room for close button -->
+        <Border Background="#F8FAFC"
+                CornerRadius="20"
+                Margin="12,34,12,12">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="32" ShadowDepth="4" Opacity="0.12" Color="#000000"/>
+            </Border.Effect>
 
-        <Grid Margin="20,16,20,16">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Tab row -->
-                <RowDefinition Height="12"/>
-                <!-- Spacer -->
-                <RowDefinition Height="1"/>
+            <Grid Margin="20,16,20,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="12"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="12"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- ── TAB ROW ── -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="0,0,8,0"
+                            Command="{Binding FilterCommand}" CommandParameter="all">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TabButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ActiveFilter}" Value="all">
+                                        <Setter Property="Background" Value="#1565C0"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock Text="Бүгд" FontSize="18" FontWeight="Bold"/>
+                    </Button>
+
+                    <Button Grid.Column="1" Margin="0,0,8,0"
+                            Command="{Binding FilterCommand}" CommandParameter="goe">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TabButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ActiveFilter}" Value="goe">
+                                        <Setter Property="Background" Value="#1565C0"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock Text="Гоё" FontSize="18" FontWeight="SemiBold"/>
+                    </Button>
+
+                    <Button Grid.Column="2"
+                            Command="{Binding FilterCommand}" CommandParameter="azyn">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource TabButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ActiveFilter}" Value="azyn">
+                                        <Setter Property="Background" Value="#1565C0"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock Text="Азын" FontSize="18" FontWeight="SemiBold"/>
+                    </Button>
+                </Grid>
+
                 <!-- Divider -->
-                <RowDefinition Height="12"/>
-                <!-- Spacer -->
-                <RowDefinition Height="*"/>
-                <!-- Grid area -->
-            </Grid.RowDefinitions>
+                <Rectangle Grid.Row="2" Fill="#E2E8F0" Height="1"/>
 
-            <!-- ── TAB ROW ── -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <!-- Бүгд -->
-                <Button Grid.Column="0"
-                        Margin="0,0,8,0"
-                        Command="{Binding FilterCommand}"
-                        CommandParameter="all">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource TabButtonStyle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ActiveFilter}" Value="all">
-                                    <Setter Property="Background" Value="#1565C0"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <TextBlock Text="Бүгд" FontSize="18" FontWeight="Bold"/>
-                </Button>
-
-                <!-- Гоё -->
-                <Button Grid.Column="1"
-                        Margin="0,0,8,0"
-                        Command="{Binding FilterCommand}"
-                        CommandParameter="goe">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource TabButtonStyle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ActiveFilter}" Value="goe">
-                                    <Setter Property="Background" Value="#1565C0"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <TextBlock Text="Гоё" FontSize="18" FontWeight="SemiBold"/>
-                </Button>
-
-                <!-- Азын -->
-                <Button Grid.Column="2"
-                        Command="{Binding FilterCommand}"
-                        CommandParameter="azyn">
-                    <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource TabButtonStyle}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ActiveFilter}" Value="azyn">
-                                    <Setter Property="Background" Value="#1565C0"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <TextBlock Text="Азын" FontSize="18" FontWeight="SemiBold"/>
-                </Button>
+                <!-- ── NUMBER GRID ── -->
+                <ScrollViewer Grid.Row="4"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding FilteredNumbers}"
+                                  ItemTemplate="{StaticResource NumberCellTemplate}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="4"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
             </Grid>
+        </Border>
 
-            <!-- Divider -->
-            <Rectangle Grid.Row="2"
-                       Fill="#E2E8F0"
-                       Height="1"/>
-
-            <!-- ── NUMBER GRID ── -->
-            <ScrollViewer Grid.Row="4"
-                          VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl ItemsSource="{Binding FilteredNumbers}"
-                              ItemTemplate="{StaticResource NumberCellTemplate}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="4"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
-
-        </Grid>
-    </Border>
+        <!-- Close button — card-аас гадна, баруун дээд булан -->
+        <Button Style="{StaticResource CloseButtonStyle}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,12,12,0"
+                Click="CloseButton_Click"/>
+    </Grid>
 </Window>

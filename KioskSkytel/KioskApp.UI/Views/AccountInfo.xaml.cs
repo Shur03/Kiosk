@@ -23,9 +23,15 @@ namespace KioskSkytel.KioskApp.UI.Views
             Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ContinueBtnClick(object sender, RoutedEventArgs e)
         {
+            var window = new AccountPaymentInfo();
+        }
 
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }

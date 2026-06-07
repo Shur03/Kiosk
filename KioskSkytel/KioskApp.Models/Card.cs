@@ -6,6 +6,7 @@ namespace KioskApp.Models
         {
             SKYTEL = 1,
             GOPLUS = 2,
+            CALLY = 3,
         }
 
         public required int Id { get; set; }

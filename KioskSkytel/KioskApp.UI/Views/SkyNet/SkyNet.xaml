@@ -90,7 +90,7 @@
                             Background="#EEF4FF"
                             HorizontalAlignment="Center"
                             Margin="0,0,0,18">
-                        <MaterialDesign:PackIcon Kind="FileDocumentOutline"
+                        <MaterialDesign:PackIcon Kind="CreditCardOutline"
                                                  Width="36"
                                 Height="36"
                                                  Foreground="#1A73E8"

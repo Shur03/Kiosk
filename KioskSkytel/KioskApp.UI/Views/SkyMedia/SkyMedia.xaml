@@ -90,12 +90,12 @@
                             Background="#EEF4FF"
                             HorizontalAlignment="Center"
                             Margin="0,0,0,18">
-                        <MaterialDesign:PackIcon Kind="FileDocumentOutline"
-                                                 Width="36"
-                                Height="36"
-                                                 Foreground="#1A73E8"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"/>
+                        <MaterialDesign:PackIcon Kind="CreditCardOutline"
+                         Width="36"
+                         Height="36"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"           
+                         Foreground="#1A73E8"/>
                     </Border>
 
                     <TextBlock Text="Төлбөр төлөх"
@@ -120,15 +120,15 @@
                     <Border Width="72"
                             Height="72"
                             CornerRadius="36"
-                            Background="#FFF7E6"
+                            Background="#EEF4FF"
                             HorizontalAlignment="Center"
                             Margin="0,0,0,18">
-                        <MaterialDesign:PackIcon Kind="FileDocumentOutline"
-                                                 Width="36"
-                                Height="36"
-                                                 Foreground="#1A73E8"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"/>
+                        <MaterialDesign:PackIcon Kind="AccountCircle"
+                         Width="36"
+                         Height="36"
+                         Foreground="#1A73E8"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"/>
                     </Border>
 
                     <TextBlock Text="Захиалга өгөх"

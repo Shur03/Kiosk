@@ -109,5 +109,10 @@ namespace KioskSkytel.KioskApp.UI.Views
                 CancelBtn_Click(this, null);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

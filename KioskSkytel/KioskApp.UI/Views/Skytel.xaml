@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="KioskSkytel.KioskApp.UI.Views.Skytel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
@@ -67,7 +68,19 @@
                 Click="BtnNewNumber_Click"
                     >
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="📄" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <Border Width="72"
+                              Height="72"
+                              CornerRadius="36"
+                              Background="#EEF4FF"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,18">
+                        <materialDesign:PackIcon Kind="TicketPercentOutline"
+                                 Width="48"
+                                 Height="48"
+                                 Foreground="#1A73E8"
+                                 VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                    </Border>
                     <TextBlock Text="Шинэ дугаар" FontSize="18" FontWeight="Bold"
                            Foreground="DimGray" HorizontalAlignment="Center"
                            Margin="0,12,0,0"/>
@@ -80,9 +93,21 @@
                     
                 Click="BtnBuyCard_Click">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="⚡" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <Border Width="72"
+                              Height="72"
+                              CornerRadius="36"
+                              Background="#EEF4FF"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,18">
+                        <materialDesign:PackIcon Kind="Cellphone"
+                         Width="48"
+                         Height="48"
+                         Foreground="#1A73E8"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                    </Border>
                     <TextBlock Text="Нэгж авах" FontSize="18" FontWeight="Bold"
-                           Foreground="#0D1B2A" HorizontalAlignment="Center"
+                           Foreground="DimGray" HorizontalAlignment="Center"
                            Margin="0,12,0,0"/>
                 </StackPanel>
             </Button>
@@ -92,7 +117,19 @@
                  
                 Click="BtnPayment_Click">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="💳" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <Border Width="72"
+                             Height="72"
+                             CornerRadius="36"
+                             Background="#EEF4FF"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,18"> 
+                        <materialDesign:PackIcon Kind="CreditCardOutline"
+                         Width="48"
+                         Height="48"
+                         Foreground="#1A73E8"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                    </Border>
                     <TextBlock Text="Төлбөр төлөх" FontSize="18" FontWeight="Bold"
                            Foreground="DimGray" HorizontalAlignment="Center"
                            Margin="0,12,0,0"/>
@@ -105,7 +142,19 @@
                 Click="BtnSimRecovery_Click"
                     >
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="🔄" FontSize="48" Foreground="LightGray" HorizontalAlignment="Center"/>
+                    <Border Width="72"
+         Height="72"
+         CornerRadius="36"
+         Background="#EEF4FF"
+         HorizontalAlignment="Center"
+         Margin="0,0,0,18">
+                        <materialDesign:PackIcon Kind="Restore"
+                         Width="48"
+                         Height="48"
+                         Foreground="#1A73E8"
+                                                 VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                    </Border>
                     <TextBlock Text="Сим сэргэх" FontSize="18" FontWeight="Bold"
                            Foreground="DimGray" HorizontalAlignment="Center"
                            Margin="0,12,0,0"/>

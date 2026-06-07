@@ -12,6 +12,6 @@ namespace KioskApp.Models
         public decimal Amount { get; set; }
         public PaymentMethodType PaymentMethod { get; set; }
         public string TransactionReference { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
+        public int Status { get; set; } = 0;
     }
 }

@@ -36,5 +36,9 @@ namespace KioskSkytel.KioskApp.UI.Views
         {
             CustomMessageBox.Show(message, MessageBoxType.Warning);
         }
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

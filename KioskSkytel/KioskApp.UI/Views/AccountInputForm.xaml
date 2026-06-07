@@ -6,14 +6,14 @@
         xmlns:conv="clr-namespace:KioskSkytel.KioskApp.UI.Converters"
         mc:Ignorable="d"
         Title=""
-        Height="560"
+        Height="680"
         Width="400"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner"
         KeyDown="Window_KeyDown"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
@@ -54,7 +54,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Bd" Property="Background" Value="#EFF6FF"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#3B82F6"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#1565C0"/>
                                 <Setter TargetName="Bd" Property="BorderThickness" Value="2"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
@@ -64,6 +64,39 @@
                                         <ScaleTransform ScaleX="0.96" ScaleY="0.96"/>
                                     </Setter.Value>
                                 </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Close button — AccountInfo-тэй адил: цагаан дугуй, хөх хүрээ -->
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="White"
+                                CornerRadius="22"
+                                BorderBrush="#1565C0"
+                                BorderThickness="2">
+                            <TextBlock Text="✕"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1565C0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#EFF6FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#DBEAFE"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -117,7 +150,7 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="#3B82F6"/>
+            <Setter Property="Background" Value="#1565C0"/>
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Height" Value="58"/>
@@ -134,10 +167,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#2563EB"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#1976D2"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#1D4ED8"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#0D47A1"/>
                                 <Setter TargetName="Bd" Property="RenderTransform">
                                     <Setter.Value>
                                         <ScaleTransform ScaleX="0.96" ScaleY="0.96"/>
@@ -154,7 +187,7 @@
         <Style x:Key="AnimatedCursor" TargetType="TextBlock">
             <Setter Property="Text" Value="|"/>
             <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Foreground" Value="#3B82F6"/>
+            <Setter Property="Foreground" Value="#1565C0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Style.Triggers>
                 <Trigger Property="IsVisible" Value="True">
@@ -173,202 +206,156 @@
         </Style>
     </Window.Resources>
 
-    <!-- Outer card with shadow -->
-    <Border Background="White"
-            CornerRadius="28"
-            Effect="{StaticResource WindowShadow}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Header -->
-                <RowDefinition Height="*"/>
-                <!-- Body -->
-            </Grid.RowDefinitions>
+    <!-- Outer Grid: card + floating close button overlay -->
+    <Grid>
+        <!-- Card pushed down by top margin to leave room for close button -->
+        <Border Background="White"
+                CornerRadius="28"
+                Margin="0,22,0,0"
+                Effect="{StaticResource WindowShadow}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Header -->
+                    <RowDefinition Height="*"/>
+                    <!-- Body -->
+                </Grid.RowDefinitions>
 
-            <!-- ══════════════ HEADER ══════════════ -->
-            <Border Grid.Row="0" CornerRadius="28,28,0,0" Padding="22,0,16,0" Height="58">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#2563EB" Offset="0"/>
-                        <GradientStop Color="#1D4ED8" Offset="0.6"/>
-                        <GradientStop Color="#1E3A8A" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-
-                <Grid>
-                    <!-- Phone icon + Title -->
+                <!-- ══════════════ HEADER ══════════════ -->
+                <Border Grid.Row="0"
+                        Background="Transparent"
+                        CornerRadius="28,28,0,0"
+                        Padding="22,0,16,0"
+                        Height="64">
                     <StackPanel Orientation="Horizontal"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left">
-                        <!-- Phone SVG icon circle -->
-                        <TextBlock Text="{Binding HeaderText}"
-                                   FontSize="18"
-                                   FontWeight="SemiBold"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"/>
+                        <!-- Phone icon circle -->
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{Binding HeaderText}"
+                                       FontSize="17"
+                                       FontWeight="Bold"
+                                       Foreground="DimGray"/>
+                        </StackPanel>
                     </StackPanel>
-
-                    <!-- Close button -->
-                    <Button HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Width="36" Height="36"
-                            Cursor="Hand"
-                            Click="CancelBtn_Click"
-                            Background="Transparent"
-                            BorderThickness="0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border x:Name="Bd" Background="Transparent" CornerRadius="18">
-                                    <Viewbox Width="18" Height="18">
-                                        <Path Fill="White" Opacity="0.85"
-                                              Data="M19,6.4L17.6,5L12,10.6L6.4,5L5,6.4L10.6,12L5,17.6L6.4,19L12,13.4L17.6,19L19,17.6L13.4,12L19,6.4Z"/>
-                                    </Viewbox>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Bd" Property="Background" Value="#33FFFFFF"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
-            </Border>
-
-            <!-- ══════════════ BODY ══════════════ -->
-            <Grid Grid.Row="1" Margin="16,12,16,14">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <!-- Display area fixed height -->
-                    <RowDefinition Height="10"/>
-                    <!-- Spacer -->
-                    <RowDefinition Height="*"/>
-                    <!-- Numpad fills remaining space -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Hint -->
-                </Grid.RowDefinitions>
-
-                <!-- Display / Input area -->
-                <Border Grid.Row="0"
-                        Background="#F8FAFC"
-                        CornerRadius="14"
-                        BorderBrush="#CBD5E1"
-                        BorderThickness="1.5"
-                        Padding="16,0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock x:Name="TxtDisplay"
-                                   Grid.Column="0"
-                                   FontSize="24"
-                                   FontWeight="SemiBold"
-                                   VerticalAlignment="Center"
-                                   Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
-                                   FontFamily="Consolas, Courier New, monospace">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="#0F172A"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Input.Length}" Value="0">
-                                            <Setter Property="Foreground" Value="#94A3B8"/>
-                                            <Setter Property="Text" Value="8 оронтой дугаар"/>
-                                            <Setter Property="FontFamily" Value="Segoe UI"/>
-                                            <Setter Property="FontSize" Value="18"/>
-                                            <Setter Property="FontWeight" Value="Normal"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-
-                        <TextBlock Grid.Column="1"
-                                   Style="{StaticResource AnimatedCursor}"
-                                   Visibility="{Binding Input, Converter={StaticResource StringToVisibilityConverter}}"/>
-                    </Grid>
                 </Border>
 
-                <!-- Numpad — fills all remaining height evenly -->
-                <Grid Grid.Row="2" x:Name="NumPadGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <!-- ══════════════ BODY ══════════════ -->
+                <Grid Grid.Row="1" Margin="16,16,16,16">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <!-- Display area -->
+                        <RowDefinition Height="12"/>
+                        <!-- Spacer -->
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <!-- Numpad -->
                     </Grid.RowDefinitions>
 
-                    <!-- Row 1 -->
-                    <Button Grid.Row="0" Grid.Column="0" Content="1" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="1"/>
-                    <Button Grid.Row="0" Grid.Column="1" Content="2" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="2"/>
-                    <Button Grid.Row="0" Grid.Column="2" Content="3" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="3"/>
+                    <!-- Display / Input area -->
+                    <Border Grid.Row="0"
+                            Background="#F0F7FF"
+                            CornerRadius="16"
+                            BorderBrush="#BFDBFE"
+                            BorderThickness="2"
+                            Padding="18,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                    <!-- Row 2 -->
-                    <Button Grid.Row="1" Grid.Column="0" Content="4" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="4"/>
-                    <Button Grid.Row="1" Grid.Column="1" Content="5" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="5"/>
-                    <Button Grid.Row="1" Grid.Column="2" Content="6" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="6"/>
-
-                    <!-- Row 3 -->
-                    <Button Grid.Row="2" Grid.Column="0" Content="7" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="7"/>
-                    <Button Grid.Row="2" Grid.Column="1" Content="8" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="8"/>
-                    <Button Grid.Row="2" Grid.Column="2" Content="9" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="9"/>
-
-                    <!-- Row 4 -->
-                    <Button Grid.Row="3" Grid.Column="0" Content="0" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="0"/>
-
-                    <!-- Backspace -->
-                    <Button Grid.Row="3" Grid.Column="1"
-                            Style="{StaticResource ClearButtonStyle}"
-                            Command="{Binding BackspaceCommand}">
-                        <Viewbox Width="22" Height="22">
-                            <Path Fill="#EF4444"
-                                  Data="M22,3H7C6.31,3 5.77,3.35 5.41,3.88L0,12L5.41,20.12C5.77,20.64 6.31,21 7,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12L19,15.59Z"/>
-                        </Viewbox>
-                    </Button>
-
-                    <!-- OK -->
-                    <Button Grid.Row="3" Grid.Column="2"
-                            Style="{StaticResource OkButtonStyle}"
-                            Command="{Binding OkCommand}">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Viewbox Width="16" Height="16" Margin="0,0,6,0">
-                                <Path Fill="White"
-                                      Data="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
-                            </Viewbox>
-                            <TextBlock Text="OK"
-                                       FontSize="18"
+                            <TextBlock x:Name="TxtDisplay"
+                                       Grid.Column="0"
+                                       FontSize="26"
                                        FontWeight="Bold"
-                                       Foreground="White"
-                                       VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"
+                                       FontFamily="Consolas, Courier New, monospace">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#1565C0"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Input.Length}" Value="0">
+                                                <Setter Property="Foreground" Value="#94A3B8"/>
+                                                <Setter Property="Text" Value="8 оронтой дугаар"/>
+                                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                                <Setter Property="FontSize" Value="16"/>
+                                                <Setter Property="FontWeight" Value="Normal"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="1"
+                                       Style="{StaticResource AnimatedCursor}"
+                                       Visibility="{Binding Input, Converter={StaticResource StringToVisibilityConverter}}"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Numpad -->
+                    <Grid Grid.Row="2" x:Name="NumPadGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Grid.Column="0" Content="1" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="1"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="2" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="2"/>
+                        <Button Grid.Row="0" Grid.Column="2" Content="3" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="3"/>
+
+                        <Button Grid.Row="1" Grid.Column="0" Content="4" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="4"/>
+                        <Button Grid.Row="1" Grid.Column="1" Content="5" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="5"/>
+                        <Button Grid.Row="1" Grid.Column="2" Content="6" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="6"/>
+
+                        <Button Grid.Row="2" Grid.Column="0" Content="7" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="7"/>
+                        <Button Grid.Row="2" Grid.Column="1" Content="8" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="8"/>
+                        <Button Grid.Row="2" Grid.Column="2" Content="9" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="9"/>
+
+                        <Button Grid.Row="3" Grid.Column="0" Content="0" Style="{StaticResource NumPadButtonStyle}" Command="{Binding DigitCommand}" CommandParameter="0"/>
+
+                        <!-- Backspace -->
+                        <Button Grid.Row="3" Grid.Column="1"
+                                Style="{StaticResource ClearButtonStyle}"
+                                Command="{Binding BackspaceCommand}">
+                            <Viewbox Width="22" Height="22">
+                                <Path Fill="#EF4444"
+                                      Data="M22,3H7C6.31,3 5.77,3.35 5.41,3.88L0,12L5.41,20.12C5.77,20.64 6.31,21 7,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12L19,15.59Z"/>
+                            </Viewbox>
+                        </Button>
+
+                        <!-- OK -->
+                        <Button Grid.Row="3" Grid.Column="2"
+                                Style="{StaticResource OkButtonStyle}"
+                                Command="{Binding OkCommand}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Viewbox Width="16" Height="16" Margin="0,0,6,0">
+                                    <Path Fill="White"
+                                          Data="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
+                                </Viewbox>
+                                <TextBlock Text="OK"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           Foreground="White"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                 </Grid>
-
-                <!-- Hint text -->
-                <TextBlock Grid.Row="3"
-                           FontSize="12"
-                           Foreground="#94A3B8"
-                           HorizontalAlignment="Center"
-                           Margin="0,6,0,0">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Visible"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Input.Length}" Value="8">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-
             </Grid>
-        </Grid>
-    </Border>
+        </Border>
+
+        <!-- Close button — card-аас гадна, баруун дээд булан дээр float -->
+        <Button Style="{StaticResource CloseButtonStyle}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="CancelBtn_Click"/>
+    </Grid>
 </Window>

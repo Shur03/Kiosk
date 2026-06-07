@@ -35,11 +35,6 @@ namespace KioskSkytel.KioskApp.Views
                 InputTextBox.Text = InputTextBox.Text[..^1];
         }
 
-        private void MicButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: integrate speech recognition
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
