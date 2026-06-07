@@ -11,8 +11,6 @@ namespace KioskSkytel.KioskApp.UI.Views
     public partial class Skytel : UserControl
     {
         private Border? _overlayBorder;
-        private readonly CardCategory _cardType = CardCategory.SKYTEL;
-
         public Skytel()
         {
             InitializeComponent();
@@ -50,14 +48,6 @@ namespace KioskSkytel.KioskApp.UI.Views
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
 
-            //if (window.ShowDialog() == true)
-            //{
-            //    MessageBox.Show(
-            //        $"Дугаар: {window.PhoneNumber}\nТөлбөр амжилттай хийгдлээ.",
-            //        "Амжилттай",
-            //        MessageBoxButton.OK,
-            //        MessageBoxImage.Information);
-            //}
         }
 
         private void BtnBuyCard_Click(object sender, RoutedEventArgs e)

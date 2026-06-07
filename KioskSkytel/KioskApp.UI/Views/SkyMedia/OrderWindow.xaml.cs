@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using KioskSkytel.KioskApp.Views.OrderWindow;
+using KioskSkytel.KioskApp.Views.SkyMedia;
 
-namespace KioskSkytel.KioskApp.UI.Views.OrderWindow
+namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
 {
     /// <summary>
     /// Interaction logic for OrderWindow.xaml
@@ -29,7 +29,7 @@ namespace KioskSkytel.KioskApp.UI.Views.OrderWindow
 
         private void BtnBuyCard_Click(object sender, RoutedEventArgs e)
         {
-            var window = new BuyCard();
+            var window = new AddressChange();
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
         }

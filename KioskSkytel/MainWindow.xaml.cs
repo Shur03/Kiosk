@@ -106,6 +106,11 @@ namespace KioskSkytel
             MainContent.Content = new SelectSimType();
         }
 
+        public void ShowGetOrderWindow()
+        {
+            MainContent.Content = new OrderWindow();
+        }
+
         // =========================
         // PLACEHOLDER VIEW
         // =========================

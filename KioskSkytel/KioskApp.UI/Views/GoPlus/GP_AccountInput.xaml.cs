@@ -1,9 +1,7 @@
 ﻿using KioskApp.Models;
 using KioskApp.Services.Database;
 using KioskApp.Services.Repository;
-using KioskSkytel.KioskApp.UI.ViewModels;
 using KioskSkytel.KioskApp.UI.Views;
-using KioskSkytel.KioskApp.UI.Views.GoPlus;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
@@ -133,7 +131,7 @@ namespace KioskSkytel.KioskApp.Views
             var accountIdentifier = InputTextBox.Text?.Trim();
             if (string.IsNullOrWhiteSpace(accountIdentifier))
             {
-                MessageBox.Show("Нэвтрэх нэрээ оруулна уу.", "Анхаар", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show("Нэвтрэх нэрээ оруулна уу.", MessageBoxType.Warning);
                 return;
             }
 
@@ -142,7 +140,7 @@ namespace KioskSkytel.KioskApp.Views
             var accounts = await accountRepo.GetAccountsAsync(accountIdentifier, (int)_serviceType);
             if (accounts == null || accounts.Count == 0)
             {
-                MessageBox.Show("Ийм нэвтрэх нэртэй GO+ данс олдсонгүй.", "Анхаар", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show("Бүртгэл олдсонгүй", MessageBoxType.Warning);
                 return;
             }
 

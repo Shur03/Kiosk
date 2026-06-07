@@ -78,7 +78,7 @@
             <!-- Шинэ захиалга -->
             <Button Grid.Column="0"
                     Style="{StaticResource CardButtonStyle}"
-                    Click="BtnBuyCard_Click">
+                    Click="BtnPayment_Click">
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Width="160">
@@ -98,7 +98,7 @@
                                                  VerticalAlignment="Center"/>
                     </Border>
 
-                    <TextBlock Text="Шинэ захиалга"
+                    <TextBlock Text="Төлбөр төлөх"
                                FontSize="18"
                                FontWeight="Bold"
                                Foreground="#1A1A2E"
@@ -111,7 +111,7 @@
             <!-- Хаяг шилжих захиалга -->
             <Button Grid.Column="1"
                     Style="{StaticResource CardButtonStyle}"
-                    Click="BtnChangeAddress_Click">
+                    Click="BtnGetOrder_Click">
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Width="160">
@@ -131,7 +131,7 @@
                                                  VerticalAlignment="Center"/>
                     </Border>
 
-                    <TextBlock Text="Хаяг шилжих захиалга"
+                    <TextBlock Text="Захиалга өгөх"
                                FontSize="18"
                                FontWeight="Bold"
                                Foreground="#1A1A2E"

@@ -34,7 +34,7 @@ namespace KioskSkytel.KioskApp.UI.Views
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message, "Карт ачаалах", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show(ex.Message, MessageBoxType.Warning);
             }
         }
 
@@ -42,7 +42,7 @@ namespace KioskSkytel.KioskApp.UI.Views
         {
             if (_viewModel.SelectedCard?.Card is not Card selectedCard)
             {
-                MessageBox.Show("Эхлээд карт сонгоно уу.", "Анхаар", MessageBoxButton.OK, MessageBoxImage.Warning);
+                CustomMessageBox.Show("Эхлээд карт сонгоно уу.", MessageBoxType.Warning);
                 return;
             }
 

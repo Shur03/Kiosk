@@ -18,6 +18,7 @@ namespace KioskSkytel.KioskApp.UI.ViewModels
 
         private const int MaxLengthConst = 8;
         private string _input = string.Empty;
+        public string HeaderText { get; }
         private readonly ServiceType _serviceType;
 
         public string Input
@@ -46,6 +47,9 @@ namespace KioskSkytel.KioskApp.UI.ViewModels
         public AccountInputViewModel(ServiceType serviceType = ServiceType.SKYTEL)
         {
             _serviceType = serviceType;
+            HeaderText = serviceType == ServiceType.SKYTEL
+           ? "Дугаараа оруулна уу"
+           : "Гэрээний дугаараа оруулна уу";
             DigitCommand = new RelayCommand(OnDigit);
             BackspaceCommand = new RelayCommand(_ => OnBackspace(), _ => Input.Length > 0);
             OkCommand = new RelayCommand(async _ => await OnOkAsync(), _ => CanAccept);

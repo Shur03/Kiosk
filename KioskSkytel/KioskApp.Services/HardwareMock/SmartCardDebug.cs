@@ -62,7 +62,8 @@ namespace KioskSkytel.KioskApp.Services.HardwareMock
             finally
             {
                 Log("=== SmartCardDebug end ===");
-                MessageBox.Show(_log.ToString(), "SmartCard Debug", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Use custom message box so UI is consistent
+                KioskSkytel.KioskApp.UI.Views.CustomMessageBox.Show(_log.ToString(), KioskSkytel.KioskApp.UI.Views.MessageBoxType.Info);
             }
         }
 

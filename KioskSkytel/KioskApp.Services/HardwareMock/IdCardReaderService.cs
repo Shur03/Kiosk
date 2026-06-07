@@ -23,6 +23,35 @@ namespace KioskSkytel.KioskApp.Services.HardwareMock
 
         private readonly StringBuilder _log = new();
 
+        /// <summary>
+        /// Checks if a card is present in the reader (by attempting to read ATR).
+        /// Returns true if a card is detected, false otherwise.
+        /// </summary>
+        public bool IsCardPresent()
+        {
+            try
+            {
+                using var context = ContextFactory.Instance.Establish(SCardScope.System);
+                var readerName = context.GetReaders()
+                    ?.FirstOrDefault(r => r.Contains("OMNIKEY", StringComparison.OrdinalIgnoreCase));
+
+                if (readerName == null)
+                    return false;
+
+                using var reader = new SCardReader(context);
+                var rc = reader.Connect(readerName, SCardShareMode.Shared, SCardProtocol.Any);
+                if (rc != SCardError.Success)
+                    return false;
+
+                var atr = ReadAtr(reader);
+                return !string.IsNullOrEmpty(atr);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public IdCardInfo ReadCard(string? pin = null)
         {
             _log.Clear();

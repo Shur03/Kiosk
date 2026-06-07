@@ -33,7 +33,7 @@ namespace KioskSkytel.KioskApp.UI.Views
 
             _viewModel.MessageRequested += (title, message) =>
             {
-                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
+                KioskSkytel.KioskApp.UI.Views.CustomMessageBox.Show(message, KioskSkytel.KioskApp.UI.Views.MessageBoxType.Error);
             };
 
             _viewModel.PhoneInfoRequested += (accountNumber, serviceType) =>

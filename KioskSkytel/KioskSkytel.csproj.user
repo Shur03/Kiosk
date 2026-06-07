@@ -8,6 +8,9 @@
     <Compile Update="KioskApp.UI\Views\CardScan.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="KioskApp.UI\Views\CustomMessageBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="KioskApp.UI\Views\GoPlus\GoPlus.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

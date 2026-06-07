@@ -1,6 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using KioskApp.Models;
 using KioskSkytel.KioskApp.Views.SkyMedia;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
 {
@@ -27,18 +28,19 @@ namespace KioskSkytel.KioskApp.UI.Views.SkyMedia
             //CardGrid.RowDefinitions[1].Height = new GridLength(buttonSize);
         }
 
-        private void BtnBuyCard_Click(object sender, RoutedEventArgs e)
+        private void BtnPayment_Click(object sender, RoutedEventArgs e)
         {
-            var window = new BuyCard();
+            var window = new AccountInputForm(ServiceType.SKYMEDIA, AccountInputAction.BuyCard);
             window.Owner = Window.GetWindow(this);
             window.ShowDialog();
         }
 
-        public void BtnChangeAddress_Click(object sender, RoutedEventArgs e)
+        public void BtnGetOrder_Click(object sender, RoutedEventArgs e)
         {
-            var window = new AddressChange();
-            window.Owner = Window.GetWindow(this);
-            window.ShowDialog();
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.ShowGetOrderWindow();
+            }
         }
     }
 }

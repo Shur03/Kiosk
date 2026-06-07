@@ -34,11 +34,7 @@ namespace KioskSkytel.KioskApp.UI.Views
 
         private void ViewModel_LoadFailed(object? sender, string message)
         {
-            MessageBox.Show(
-                message,
-                "Дугаар хайх",
-                MessageBoxButton.OK,
-                MessageBoxImage.Warning);
+            CustomMessageBox.Show(message, MessageBoxType.Warning);
         }
     }
 }
