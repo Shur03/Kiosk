@@ -211,7 +211,7 @@
                                                         </StackPanel>
                                                 </Border>
 
-                                                <!-- Төлөх дун -->
+                                                <!-- Төлөх дүн -->
                                                 <Border Style="{StaticResource InfoRowStyle}">
                                                         <StackPanel>
                                                                 <TextBlock Text="Төлөх дүн:"
@@ -222,15 +222,15 @@
                                                 </Border>
 
                                                 <!-- Баримтын төрөл -->
-                                                <Border Style="{StaticResource InfoRowStyle}">
-                                                        <StackPanel>
-                                                                <TextBlock Text="Баримтын төрөл:"
+                        <Border Style="{StaticResource InfoRowStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Баримтын төрөл:"
                                                                            Style="{StaticResource FieldLabelStyle}"/>
-                                                                <TextBlock Text="Хувь хүн"
+                                <TextBlock Text="Хувь хүн"
                                                                            Style="{StaticResource FieldValueStyle}"/>
-                                                        </StackPanel>
-                                                </Border>
-                                        </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
                                 </Border>
 
                                 <!-- Divider -->

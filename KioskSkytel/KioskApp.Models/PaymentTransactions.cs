@@ -8,10 +8,11 @@ namespace KioskApp.Models
     public class PaymentTransaction
     {
         public int Id { get; set; }
-        public string AccountId { get; set; } = string.Empty;
+        public int AccountId { get; set; }
         public decimal Amount { get; set; }
         public PaymentMethodType PaymentMethod { get; set; }
         public string TransactionReference { get; set; } = string.Empty;
-        public int Status { get; set; } = 0;
+        public int Status { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

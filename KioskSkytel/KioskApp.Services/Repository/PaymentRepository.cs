@@ -56,7 +56,7 @@ namespace KioskApp.Services.Repository
 
             await using var command = new NpgsqlCommand(sql, connection);
             command.Parameters.AddWithValue("@invoiceId", invoiceId);
-            command.Parameters.AddWithValue("@accountId", accountId);
+            command.Parameters.AddWithValue("@accountId", accountId.ToString());
             command.Parameters.AddWithValue("@amount", amount);
             command.Parameters.AddWithValue("@paymentMethod", (int)paymentMethod);
             command.Parameters.AddWithValue("@transactionReference", transactionReference);
@@ -65,6 +65,45 @@ namespace KioskApp.Services.Repository
 
             var result = await command.ExecuteScalarAsync();
             return Convert.ToInt32(result);
+        }
+
+        public async Task<List<PaymentTransaction>> GetPaymentTransactionsByAccountNumberAndStatusAsync(string accountNumber, int serviceType, int status)
+        {
+            var transactions = new List<PaymentTransaction>();
+            using var connection = await _databaseService.GetOpenConnectionAsync();
+            const string sql = @"SELECT pt.id, pt.account_id, pt.amount, pt.payment_method, pt.transaction_reference, pt.status, pt.created_at
+                FROM public.payment_transactions pt
+                JOIN public.accounts a ON pt.account_id = a.id::text
+                WHERE a.account_number = @accountNumber
+                  AND a.service_type = @serviceType
+                  AND a.is_active = 1
+                  AND pt.status = @status
+                ORDER BY pt.created_at DESC";
+
+            await using var command = new NpgsqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@accountNumber", accountNumber);
+            command.Parameters.AddWithValue("@serviceType", serviceType);
+            command.Parameters.AddWithValue("@status", status);
+
+            await using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                var accountIdOrdinal = reader.GetOrdinal("account_id");
+                transactions.Add(new PaymentTransaction
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("id")),
+                    AccountId = reader.IsDBNull(accountIdOrdinal)
+                        ? 0
+                        : Convert.ToInt32(reader.GetValue(accountIdOrdinal)),
+                    Amount = reader.GetDecimal(reader.GetOrdinal("amount")),
+                    PaymentMethod = (PaymentMethodType)reader.GetInt32(reader.GetOrdinal("payment_method")),
+                    TransactionReference = reader.GetString(reader.GetOrdinal("transaction_reference")),
+                    Status = reader.GetInt32(reader.GetOrdinal("status")),
+                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("created_at"))
+                });
+            }
+
+            return transactions;
         }
 
         public static string GenerateTransactionReference(PaymentMethodType paymentMethod)

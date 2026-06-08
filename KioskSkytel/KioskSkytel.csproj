@@ -9,12 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="KioskApp.Core\**" />
     <Compile Remove="KioskApp.Shared\**" />
     <Compile Remove="KioskApp.UI\Controls\**" />
+    <EmbeddedResource Remove="KioskApp.Core\**" />
     <EmbeddedResource Remove="KioskApp.Shared\**" />
     <EmbeddedResource Remove="KioskApp.UI\Controls\**" />
+    <None Remove="KioskApp.Core\**" />
     <None Remove="KioskApp.Shared\**" />
     <None Remove="KioskApp.UI\Controls\**" />
+    <Page Remove="KioskApp.Core\**" />
     <Page Remove="KioskApp.Shared\**" />
     <Page Remove="KioskApp.UI\Controls\**" />
   </ItemGroup>
@@ -26,8 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="KioskApp.Core\Interfaces\" />
-    <Folder Include="KioskApp.Core\Services\" />
     <Folder Include="KioskApp.Services\Api\" />
     <Folder Include="KioskApp.Services\DTOs\" />
   </ItemGroup>
@@ -54,6 +56,12 @@
     <PackageReference Include="Npgsql" Version="10.0.3" />
     <PackageReference Include="PCSC" Version="7.0.1" />
     <PackageReference Include="PCSC.Iso7816" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="KioskApp.UI\Views\AccountPaymentInfo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

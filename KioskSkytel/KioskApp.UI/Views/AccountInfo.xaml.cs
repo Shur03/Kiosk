@@ -26,6 +26,8 @@ namespace KioskSkytel.KioskApp.UI.Views
         private void ContinueBtnClick(object sender, RoutedEventArgs e)
         {
             var window = new AccountPaymentInfo();
+            window.Owner = Window.GetWindow(this);
+            window.ShowDialog();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
