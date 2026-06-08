@@ -287,8 +287,7 @@
                               ItemTemplate="{StaticResource CardItemTemplate}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="4"
-                                         HorizontalAlignment="Stretch"/>
+                            <WrapPanel HorizontalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
